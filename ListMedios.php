@@ -51,8 +51,7 @@ include 'componentes/sidebar.php';
    data-bs-target="#exampleModal" 
    data-toggle="tooltip" 
    title="Editar Medio">
-    <i class="fas fa-pencil-alt btn btn-success micono"></i>
-</a>
+    <i class="fas fa-pencil-alt btn btn-success micono"></i></a>
                                             
                                             <a type="button" href="#" onclick="confirmarEliminacion(<?php echo htmlspecialchars($medio['id']); ?>); return false;" data-toggle="tooltip" title="Eliminar Medio">
                                                 <i class="fas fa-trash-alt btn btn-danger micono"></i>

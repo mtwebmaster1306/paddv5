@@ -1,91 +1,94 @@
-var currentTab = 0; // Current tab is set to be the first tab (0)
-showTab(currentTab); // Display the current tab
+var Fn = {
+    validaRut: function(rutCompleto) {
+        if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rutCompleto)) return false;
+        var tmp = rutCompleto.split('-');
+        var digv = tmp[1];
+        var rut = tmp[0];
+        if (digv == 'K') digv = 'k';
+        return (Fn.dv(rut) == digv);
+    },
+    dv: function(T) {
+        var M = 0, S = 1;
+        for (; T; T = Math.floor(T / 10)) S = (S + T % 10 * (9 - M++ % 6)) % 11;
+        return S ? S - 1 : 'k';
+    }
+};
+
+var currentTab = 0;
+showTab(currentTab);
 
 function showTab(n) {
-    // This function will display the specified tab of the form...
     var x = document.getElementsByClassName("tab");
     x[n].style.display = "block";
-    //... and fix the Previous/Next buttons:
-    if (n == 0) {
-        document.getElementById("prevBtn").style.display = "none";
-    } else {
-        document.getElementById("prevBtn").style.display = "inline";
-    }
+    
+    document.getElementById("prevBtn").style.display = n == 0 ? "none" : "inline";
+    
+    var nextBtn = document.getElementById("nextBtn");
     if (n == (x.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = "Registrar";
-        document.getElementById("nextBtn").setAttribute("onclick", "submitForm(event)");
+        nextBtn.innerHTML = "Registrar";
+        nextBtn.onclick = submitForm;
     } else {
-        document.getElementById("nextBtn").innerHTML = "Siguiente";
-        document.getElementById("nextBtn").setAttribute("onclick", "nextPrev(1)");
+        nextBtn.innerHTML = "Siguiente";
+        nextBtn.onclick = function() { nextPrev(1); };
     }
-    //... and run a function that will display the correct step indicator:
-    fixStepIndicator(n)
+    
+    fixStepIndicator(n);
 }
 
 function nextPrev(n) {
-    // This function will figure out which tab to display
     var x = document.getElementsByClassName("tab");
-    // Exit the function if any field in the current tab is invalid:
     if (n == 1 && !validateForm()) return false;
-    // Hide the current tab:
     x[currentTab].style.display = "none";
-    // Increase or decrease the current tab by 1:
-    currentTab = currentTab + n;
-    // if you have reached the end of the form...
+    currentTab += n;
     if (currentTab >= x.length) {
-        // ... the form gets submitted:
         document.getElementById("regForm").submit();
         return false;
     }
-    // Otherwise, display the correct tab:
     showTab(currentTab);
 }
 
 function validateForm() {
-    // This function deals with validation of the form fields
     var x, y, i, valid = true;
     x = document.getElementsByClassName("tab");
     y = x[currentTab].getElementsByTagName("input");
-    // A loop that checks every input field in the current tab:
+    
     for (i = 0; i < y.length; i++) {
-        // If a field is empty...
         if (y[i].value == "") {
-            // add an "invalid" class to the field:
             y[i].className += " invalid";
-            // and set the current valid status to false
             valid = false;
         }
     }
-    // If the valid status is true, mark the step as finished and valid:
+    
+    // Validación específica para RUT
+    if (currentTab == 0) {
+        var rutInput = document.getElementsByName("RUT")[0];
+        if (!Fn.validaRut(rutInput.value)) {
+            alert("RUT inválido");
+            rutInput.className += " invalid";
+            valid = false;
+        }
+    }
+    
     if (valid) {
         document.getElementsByClassName("step")[currentTab].className += " finish";
     }
-    return valid; // return the valid status
+    return valid;
 }
 
 function fixStepIndicator(n) {
-    // This function removes the "active" class of all steps...
-    var i, x = document.getElementsByClassName("step");
-    for (i = 0; i < x.length; i++) {
+    var x = document.getElementsByClassName("step");
+    for (var i = 0; i < x.length; i++) {
         x[i].className = x[i].className.replace(" active", "");
     }
-    //... and adds the "active" class on the current step:
     x[n].className += " active";
 }
 
 function getFormData() {
     const formData = new FormData(document.getElementById('regForm'));
-
-    // Convertir FormData a objeto para imprimirlo
-    const dataObject = {};
-    formData.forEach((value, key) => {
-        dataObject[key] = value;
-    });
-
-    console.log(dataObject, "hola"); // Imprime el objeto con los datos del formulario
+    const dataObject = Object.fromEntries(formData);
+    console.log(dataObject, "Datos del formulario");
 
     return {
-
         created_at: new Date().toISOString(),
         nombreCliente: dataObject.nombreCliente,
         nombreFantasia: dataObject.nombreFantasia,
@@ -106,12 +109,16 @@ function getFormData() {
     };
 }
 
-// Función para enviar el formulario
 async function submitForm(event) {
-    event.preventDefault(); // Evita la recarga de la página
+    event.preventDefault();
+
+    if (!validateForm()) {
+        alert("Por favor, complete todos los campos correctamente antes de enviar.");
+        return;
+    }
 
     let bodyContent = JSON.stringify(getFormData());
-    console.log(bodyContent, "holacon");
+    console.log(bodyContent, "Datos a enviar");
 
     let headersList = {
         "Content-Type": "application/json",
@@ -119,19 +126,40 @@ async function submitForm(event) {
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc"
     };
 
-    let response = await fetch("https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Clientes", {
-        method: "POST",
-        body: bodyContent,
-        headers: headersList
-    });
+    try {
+        let response = await fetch("https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Clientes", {
+            method: "POST",
+            body: bodyContent,
+            headers: headersList
+        });
 
-    if (response.ok) {
-        // Si el registro fue exitoso
-        alert("Registro correcto");
-    } else {
-        // Si hubo un error en el registro
-        const errorData = await response.json();
-        console.error("Error:", errorData);
-        alert("Error, intentelo nuevamente");
+        if (response.ok) {
+            alert("Registro correcto");
+            document.getElementById("regForm").reset();
+            currentTab = 0;
+            showTab(currentTab);
+        } else {
+            const errorData = await response.json();
+            console.error("Error:", errorData);
+            alert("Error, inténtelo nuevamente");
+        }
+    } catch (error) {
+        console.error("Error en la solicitud:", error);
+        alert("Error de conexión, inténtelo más tarde");
     }
 }
+
+// Añadir validación en tiempo real para el RUT
+document.addEventListener('DOMContentLoaded', function() {
+    var rutInput = document.getElementsByName("RUT")[0];
+    if (rutInput) {
+        rutInput.addEventListener('blur', function() {
+            if (!Fn.validaRut(this.value)) {
+                this.className += " invalid";
+                alert("RUT inválido");
+            } else {
+                this.className = this.className.replace(" invalid", "");
+            }
+        });
+    }
+});
