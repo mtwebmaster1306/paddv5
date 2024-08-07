@@ -14,8 +14,10 @@ include 'componentes/sidebar.php';
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h4>Listado de Proveedores</h4>
+                    <div class="card-header milinea">
+                            <div class="titulox"><h4>Listado de Proveedores</h4></div>
+                            <div class="agregar"><button type="button" class="btn btn-success micono" data-bs-toggle="modal" data-bs-target="#agregarProveedor"   >Agregar Proveedor<i class="fas fa-pencil-alt"></i></button>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -76,6 +78,93 @@ include 'componentes/sidebar.php';
         </div>
     </section>
 </div>
+
+//Agregar Proveedor
+
+<div class="modal fade" id="agregarProveedor" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                 <!-- Alerta para mostrar el resultado de la actualización -->
+                 <div id="updateAlert" class="alert" style="display:none;" role="alert"></div>
+                            
+                 
+                 <form id="formularioAgregarProveedor">
+                    <!-- Campos del formulario -->
+                    <div>
+                        <h3 class="titulo-registro mb-3">Agregar Proveedor</h3>
+                        <div class="row">
+                            <div class="col-6">
+                  
+                                <p><input class="form-control" placeholder="Nombre Identificador" name="nombreIdentificador"></p>
+                                <select class="form-select mb-3" name="id_medios" id="id_medios">
+                    <?php foreach ($medios as $medio) : ?>
+                        <option value="<?php echo $medio['id']; ?>"><?php echo $medio['NombredelMedio']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                                <p><input class="form-control" placeholder="Nombre de Proveedor" name="nombreProveedor"></p>
+                                <p><input class="form-control" placeholder="Nombre de Fantasía" name="nombreFantasia"></p>
+                                
+                                
+                            </div>
+                            <div class="col-6">
+                                <p><input class="form-control" placeholder="Rut Proveedor" name="rutProveedor"></p>
+                                <p><input class="form-control" placeholder="Giro Proveedor" name="giroProveedor"></p>
+                                <p><input class="form-control" placeholder="Nombre Representante" name="nombreRepresentante"></p>
+                                <p><input class="form-control" placeholder="Rut Representante" name="rutRepresentante"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="titulo-registro mb-3">Datos de facturación</h3>
+                        <div class="row">
+                            <div class="col-6">
+                            <p><input class="form-control" placeholder="Razón Social" name="razonSocial"></p>
+                                <p><input class="form-control" placeholder="Dirección Facturación" name="direccionFacturacion"></p>
+                                <select class="form-select mb-3" name="id_region" id="region" required>
+    <?php foreach ($regiones as $regione) : ?>
+        <option value="<?php echo $regione['id']; ?>"><?php echo $regione['nombreRegion']; ?></option>
+    <?php endforeach; ?>
+</select>
+<select class="form-select mb-3" name="id_comuna" id="comuna" required>
+    <?php foreach ($comunas as $comuna) : ?>
+        <option value="<?php echo $comuna['id_comuna']; ?>" data-region="<?php echo $comuna['id_region']; ?>">
+            <?php echo $comuna['nombreComuna']; ?>
+        </option>
+    <?php endforeach; ?>
+</select>
+                                
+                            </div>
+                            <div class="col-6">
+                            <p><input class="form-control" placeholder="Teléfono celular" name="telCelular"></p>
+                                <p><input class="form-control" placeholder="Teléfono fijo" name="telFijo"></p>
+                                <p><input class="form-control" placeholder="Email" name="email"></p>
+                            </div>
+                        </div>
+                        <h3 class="titulo-registro mb-3">Otros datos</h3>
+                        <div class="row">
+    <div class="col">
+    <p><input class="form-control" placeholder="Bonifiación por año %" name="bonificacion_ano"></p>
+    </div>
+    <div class="col" id="moneda-container">
+    <p><input class="form-control" placeholder="Escala de rango" name="escala_rango"></p>
+    </div>
+
+</div>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="provprov" onclick="submitForm(event)">Guardar cambios</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+//fin editar modal
+
 
 
 //Modal Edit Proveedor
@@ -146,9 +235,31 @@ fas fa-barcode"></i></span>
 
 
 
+<script src="<?php echo $ruta; ?>assets/js/agregarproveedor.js"></script>
 
+<script>document.getElementById('region').addEventListener('change', function () {
+    var regionId = this.value;
+    var comunaSelect = document.getElementById('comuna');
+    var opcionesComunas = comunaSelect.querySelectorAll('option');
 
+    // Mostrar solo las comunas que pertenecen a la región seleccionada
+    opcionesComunas.forEach(function (opcion) {
+        if (opcion.getAttribute('data-region') === regionId) {
+            opcion.style.display = 'block';
+        } else {
+            opcion.style.display = 'none';
+        }
+    });
 
+    // Seleccionar la primera opción visible
+    var firstVisibleOption = comunaSelect.querySelector('option[data-region="' + regionId + '"]');
+    if (firstVisibleOption) {
+        firstVisibleOption.selected = true;
+    }
+});
+
+// Disparar el evento change al cargar la página para establecer el estado inicial
+document.getElementById('region').dispatchEvent(new Event('change'));</script>
 
 
 <?php include 'componentes/settings.php'; ?>
