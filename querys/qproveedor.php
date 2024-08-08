@@ -31,16 +31,22 @@ $medios = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Medios?s
 // Debug: Imprimir los datos de proveedores para verificar la estructura
 // var_dump($proveedores);
 
-$soportesMap = [];
-foreach ($soportes as $soporte) {
-    $soportesMap[$soporte['id_soporte']] = $soporte;
+$proveedoresMap = [];
+foreach ($proveedores as $proveedore) {
+    $proveedoresMap[$proveedore['id_proveedor']] = $proveedore;
 }
+
+$clientesMap = [];
+foreach ($clientes as $cliente) {
+    $clientesMap[$cliente['id_cliente']] = $cliente;    
+}
+
 
 $soportecountsmaps = [];
 foreach ($soportecounts as $soportecount) {
     $id_soporte = $soportecount['id_soporte'];
 
-    if (isset($soportecountsmaps[$id_campania])) {
+    if (isset($soportecountsmaps[$id_soporte])) {
         $soportecountmaps[$id_soporte]['count']++;
     } else {
         $campaign['count'] = 1;

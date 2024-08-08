@@ -1,48 +1,45 @@
-function getFormData() {
-    const formData = new FormData(document.getElementById('formularioAgregarProveedor'));
-
-    // Convertir FormData a objeto para imprimirlo
-    const dataObject = {};
-    formData.forEach((value, key) => {
-        dataObject[key] = value;
+// Función para obtener los datos del formulario de agregar proveedor
+function getFormData2() {
+    const formData2 = new FormData(document.getElementById('formularioAgregarProveedor'));
+    const dataObject2 = {};
+    formData2.forEach((value, key) => {
+        dataObject2[key] = value;
     });
-
-    console.log(dataObject, "hola"); // Imprime el objeto con los datos del formulario
 
     return {
         created_at: new Date().toISOString(),
-        nombreIdentificador: dataObject.nombreIdentificador,
-        nombreProveedor: dataObject.nombreProveedor,
-        nombreFantasia: dataObject.nombreFantasia,
-        rutProveedor: dataObject.rutProveedor,
-        giroProveedor: dataObject.giroProveedor,
-        nombreRepresentante: dataObject.nombreRepresentante,
-        rutRepresentante: dataObject.rutRepresentante,
-        razonSocial: dataObject.razonSocial,
-        direccionFacturacion: dataObject.direccionFacturacion,
-        id_medios: dataObject.id_medios,
-        id_region: dataObject.id_region,
-        id_comuna: dataObject.id_comuna,
-        telCelular: dataObject.telCelular,
-        telFijo: dataObject.telFijo,
-        email: dataObject.email || null,
-        bonificacion_ano: dataObject.bonificacion_ano,
-        escala_rango: dataObject.escala_rango,
+        nombreIdentificador: dataObject2.nombreIdentificador,
+        nombreProveedor: dataObject2.nombreProveedor,
+        nombreFantasia: dataObject2.nombreFantasia,
+        rutProveedor: dataObject2.rutProveedor,
+        giroProveedor: dataObject2.giroProveedor,
+        nombreRepresentante: dataObject2.nombreRepresentante,
+        rutRepresentante: dataObject2.rutRepresentante,
+        razonSocial: dataObject2.razonSocial,
+        direccionFacturacion: dataObject2.direccionFacturacion,
+        id_medios: dataObject2.id_medios,
+        id_region: dataObject2.id_region,
+        id_comuna: dataObject2.id_comuna,
+        telCelular: dataObject2.telCelular,
+        telFijo: dataObject2.telFijo,
+        email: dataObject2.email || null,
+        bonificacion_ano: dataObject2.bonificacion_ano,
+        escala_rango: dataObject2.escala_rango,
         estado: true
     };
 }
 
-// Función para enviar el formulario
-async function submitForm(event) {
+// Función para enviar el formulario de agregar proveedor
+async function submitForm2(event) {
     event.preventDefault(); // Evita la recarga de la página
 
-    let bodyContent = JSON.stringify(getFormData());
-    console.log(bodyContent,"holacon");
+    let bodyContent = JSON.stringify(getFormData2());
     let headersList = {
         "Content-Type": "application/json",
         "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc",
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc"
     };
+
     let response = await fetch("https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Proveedores", {
         method: "POST",
         body: bodyContent,
@@ -50,16 +47,14 @@ async function submitForm(event) {
     });
 
     if (response.ok) {
-        // Si el registro fue exitoso
         alert("Registro correcto");
         location.reload();
     } else {
-        // Si hubo un error en el registro
+        let errorData = await response.json();
         console.error("Error:", errorData);
         alert("Error, intentelo nuevamente");
     }
 }
 
-// Asignar el evento de envío al botón "Siguiente"
-document.getElementById('provprov').addEventListener('click', submitForm);
-
+// Asigna el evento de envío al formulario de agregar proveedor
+document.getElementById('formularioAgregarProveedor').addEventListener('submit', submitForm2);
