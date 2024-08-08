@@ -11,7 +11,7 @@ if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
 $nombre = $_SESSION['user_name'];
 
 
-$ruta = 'http://127.0.0.1:3000/';
+$ruta = 'https://probable-space-disco-9wv5xx45g6x3766v-3000.app.github.dev/';
 
 $current_file = basename($_SERVER['PHP_SELF']);
 
