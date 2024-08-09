@@ -187,6 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Función para formatear los soportes
     function formatSoportes(soportes) {
         var html = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;" class="table">';
+        html += '<div class="card-header milinea"><div class="titulox"><h4>Listado de Proveedores</h4></div><div class="agregar"><button type="button" class="btn btn-success micono" data-bs-toggle="modal" data-bs-target="#agregarSoportessss" data-id="<?php echo $proveedor['id_proveedor']; ?>"  ><i class="fas fa-plus-circle"></i>Agregar Soporte</button></div></div>'
         html += '<thead><tr><th>ID</th><th>Nombre Soporte</th><th>Razón Social</th><th>Rut</th><th>Medio</th><th>Teléfono</th><th>Acciones</th></tr></thead>';
         html += '<tbody>';
         for (var i = 0; i < soportes.length; i++) {
@@ -388,16 +389,104 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
 //fin editar modal
 
+<div class="modal fade" id="agregarSoportessss" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formualarioSoporte">
+                    <!-- Campo oculto para el ID -->
+                    <input type="hidden" name="id_proveedor" id="id_proveedor">
+                    <!-- Campos del formulario -->
+                    <h3 class="titulo-registro mb-3">Agregar Soporte</h3>
+                    <div class="row">
+                        <div class="col-6">
+                            <p><input class="form-control" placeholder="Nombre Identificador" name="nombreIdentificador" required></p>
+                            <select class="form-select mb-3" name="id_medios" id="id_medios">
+                    <?php foreach ($medios as $medio) : ?>
+                        <option value="<?php echo $medio['id']; ?>"><?php echo $medio['NombredelMedio']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                            <p><input class="form-control" placeholder="Nombre de Proveedor" name="nombreProveedor" required></p>
+                            <p><input class="form-control" placeholder="Nombre de Fantasía" name="nombreFantasia" required></p>
+                        </div>
+                        <div class="col-6">
+                            <p><input class="form-control" placeholder="Rut Proveedor" name="rutProveedor" required></p>
+                            <p><input class="form-control" placeholder="Giro Proveedor" name="giroProveedor" required></p>
+                            <p><input class="form-control" placeholder="Nombre Representante" name="nombreRepresentante" required></p>
+                            <p><input class="form-control" placeholder="Rut Representante" name="rutRepresentante" required></p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="titulo-registro mb-3">Datos de facturación</h3>
+                        <div class="row">
+                        <div class="col-6">
+                            <p><input class="form-control" placeholder="Razón Social" name="razonSocial"></p>
+                                <p><input class="form-control" placeholder="Dirección Facturación" name="direccionFacturacion"></p>
+                                <select class="form-select mb-3" name="id_region" id="region" required>
+    <?php foreach ($regiones as $regione) : ?>
+        <option value="<?php echo $regione['id']; ?>"><?php echo $regione['nombreRegion']; ?></option>
+    <?php endforeach; ?>
+</select>
+<select class="form-select mb-3" name="id_comuna" id="comuna" required>
+    <?php foreach ($comunas as $comuna) : ?>
+        <option value="<?php echo $comuna['id_comuna']; ?>" data-region="<?php echo $comuna['id_region']; ?>">
+            <?php echo $comuna['nombreComuna']; ?>
+        </option>
+    <?php endforeach; ?>
+</select>
+                                
+                            </div>
+                            <div class="col-6">
+                                <p><input class="form-control" placeholder="Teléfono celular" name="telCelular" required></p>
+                                <p><input class="form-control" placeholder="Teléfono fijo" name="telFijo" required></p>
+                                <p><input class="form-control" placeholder="Email" name="email"></p>
+                            </div>
+                        </div>
+                        <h3 class="titulo-registro mb-3">Otros datos</h3>
+                        <div class="row">
+                            <div class="col">
+                                <p><input class="form-control" placeholder="Bonificación por año %" name="bonificacion_ano" required></p>
+                            </div>
+                            <div class="col" id="moneda-container">
+                                <p><input class="form-control" placeholder="Escala de rango" name="escala_rango" required></p>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="provprov">Guardar cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
 
 
 
-
+<script src="<?php echo $ruta; ?>assets/js/agregarsoporteproveedor.js"></script>
 <script src="<?php echo $ruta; ?>assets/js/actualizarproveedor.js"></script>
 <script src="<?php echo $ruta; ?>assets/js/agregarproveedor.js"></script>
 
+
+<script>document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('agregarSoportessss');
+
+    modal.addEventListener('show.bs.modal', (event) => {
+        // Obtener el ID del botón que abrió el modal
+        const button = event.relatedTarget;
+        const idProveedor = button.getAttribute('data-id');
+
+        // Asignar el ID al input oculto en el modal
+        const idInput = modal.querySelector('#id_proveedor');
+        idInput.value = idProveedor;
+    });
+});</script>
 <script>
 function loadProveedorData(button) {
     var idProveedor = button.getAttribute('data-idproveedor');
@@ -454,16 +543,7 @@ document.getElementById('region2').addEventListener('change', function () {
 
 document.getElementById('region').dispatchEvent(new Event('change'));
 
-document.getElementById('formato').addEventListener('change', function () {
-    var formato = this.value;
-    var monedaContainer = document.getElementById('moneda-container');
-    
-    if (formato === '% Comisión Offline' || formato === '% Comisión Online') {
-        monedaContainer.style.display = 'none';
-    } else {
-        monedaContainer.style.display = 'block';
-    }
-});
+
 
 </script>
 <script>document.getElementById('region').addEventListener('change', function () {
