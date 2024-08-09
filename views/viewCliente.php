@@ -36,6 +36,61 @@ if (empty($cliente) || !isset($cliente[0])) {
     die("No se encontró el cliente con el ID proporcionado.");
 }
 
+//////funcion para comision
+
+// Función actualizada para obtener el formato de comisión
+function getFormatoComision($idFormatoComision) {
+  $url = "https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/formatoComision?id_formatoComision=eq.$idFormatoComision&select=*";
+  $formato = makeRequest($url);
+  
+  // Añadir información de depuración
+  echo "URL de solicitud de formato: " . $url . "<br>";
+  echo "Respuesta de formato: <pre>" . print_r($formato, true) . "</pre>";
+  
+  if (!empty($formato) && isset($formato[0]['nombreComision'])) {
+      return $formato[0]['nombreComision'];
+  }
+  return 'Desconocido';
+}
+
+
+
+
+// Función actualizada para obtener la comisión del cliente
+function getComisionCliente($idCliente) {
+  $url = "https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Comisiones?id_cliente=eq.$idCliente&select=*";
+  $comision = makeRequest($url);
+  
+  // Añadir información de depuración
+  echo "URL de solicitud de comisión: " . $url . "<br>";
+  echo "Respuesta de comisión: <pre>" . print_r($comision, true) . "</pre>";
+  
+  if (!empty($comision) && isset($comision[0])) {
+      $comisionData = $comision[0];
+      $formatoComision = getFormatoComision($comisionData['id_formatoComision']);
+      
+      // Asegúrate de que este campo se llame 'id_moneda' en la tabla Comisiones
+      echo "ID de moneda en comisión: " . $comisionData['id_moneda'] . "<br>";
+      $nombreMoneda = getTipoMoneda($comisionData['id_moneda']);
+      
+      return [
+          'valor' => $comisionData['valorComision'],
+          'formato' => $formatoComision,
+          'inicio' => $comisionData['inicioComision'],
+          'fin' => $comisionData['finComision'],
+          'moneda' => $nombreMoneda
+      ];
+  }
+  return null;
+}
+
+// Obtener la comisión del cliente
+$comisionCliente = getComisionCliente($idCliente);
+
+////////////////////////////////
+$allTipoMoneda = makeRequest("https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/TipoMoneda?select=*");
+echo "Todos los tipos de moneda: <pre>" . print_r($allTipoMoneda, true) . "</pre>";
+
 
 include '../componentes/header.php';
 include '../componentes/sidebar.php';
@@ -288,63 +343,36 @@ include '../componentes/sidebar.php';
                       </div>
 
                       <div class="tab-pane fade" id="otros" role="tabpanel" aria-labelledby="profile-tab3">
-                        <form method="post" class="needs-validation">
-                          <div class="card-header">
-                            <h4>Otros Datos</h4>
-                          </div>
-                          <div class="card-body">
-                            <div class="row">
-                              <div class="form-group col-md-6 col-12">
-                                <label>First Name</label>
-                                <input type="text" class="form-control" value="John">
-                                <div class="invalid-feedback">
-                                  Please fill in the first name
-                                </div>
-                              </div>
-                              <div class="form-group col-md-6 col-12">
-                                <label>Last Name</label>
-                                <input type="text" class="form-control" value="Deo">
-                                <div class="invalid-feedback">
-                                  Please fill in the last name
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="form-group col-md-7 col-12">
-                                <label>Email</label>
-                                <input type="email" class="form-control" value="test@example.com">
-                                <div class="invalid-feedback">
-                                  Please fill in the email
-                                </div>
-                              </div>
-                              <div class="form-group col-md-5 col-12">
-                                <label>Phone</label>
-                                <input type="tel" class="form-control" value="">
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="form-group col-12">
-                                <label>Bio</label>
-                                <textarea
-                                  class="form-control summernote-simple">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur voluptatum alias molestias minus quod dignissimos.</textarea>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="form-group mb-0 col-12">
-                                <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" name="remember" class="custom-control-input" id="newsletter">
-                                  <label class="custom-control-label" for="newsletter">Subscribe to newsletter</label>
-                                  <div class="text-muted form-text">
-                                    You will get new information about products, offers and promotions
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="card-footer text-end">
-                            <button class="btn btn-primary">Save Changes</button>
-                          </div>
-                        </form>
+                       /////inicio otros
+                       <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Comisión</th>
+                <th>Formato</th>
+                <th>Valor</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha de Término</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php if ($comisionCliente): ?>
+
+                <tr><td><?php echo htmlspecialchars($comisionCliente['moneda']); ?></td>
+                    <td><?php echo htmlspecialchars($comisionCliente['valor']); ?></td>
+                    <td><?php echo htmlspecialchars($comisionCliente['formato']); ?></td>
+                    <td>Valor</td>
+                    <td>Fecha de Inicio</td>
+                    <td>Fecha de Termino</td>
+                    <td>Acciones</td>
+                </tr>
+                <?php endif; ?>
+        </tbody>
+    </table>
+
+
+
+                       //////fin otros datos
                       </div>
 
                       <div class="tab-pane fade" id="productos" role="tabpanel" aria-labelledby="profile-tab4">

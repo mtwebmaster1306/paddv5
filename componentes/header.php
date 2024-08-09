@@ -11,7 +11,7 @@ if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
 $nombre = $_SESSION['user_name'];
 
 
-$ruta = 'https://scaling-parakeet-jj4px47q9479hpxvp-3000.app.github.dev/';
+$ruta = 'https://potential-zebra-4jgpxgvw6v4vc5x9w-3000.app.github.dev/';
 
 
 $current_file = basename($_SERVER['PHP_SELF']);
