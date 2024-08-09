@@ -193,12 +193,12 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '<tbody>';
         for (var i = 0; i < soportes.length; i++) {
             html += '<tr>';
-            html += '<td>' + (soportes[i].id || '') + '</td>';
-            html += '<td>' + (soportes[i].nombre_soporte || '') + '</td>';
-            html += '<td>' + (soportes[i].razon_social || '') + '</td>';
-            html += '<td>' + (soportes[i].rut || '') + '</td>';
-            html += '<td>' + (soportes[i].medio || '') + '</td>';
-            html += '<td>' + (soportes[i].telefono || '') + '</td>';
+            html += '<td>' + (soportes[i].id_soporte || '') + '</td>';
+            html += '<td>' + (soportes[i].nombreIdentficiador || '') + '</td>';
+            html += '<td>' + (soportes[i].razonSocial || '') + '</td>';
+            html += '<td>' + (soportes[i].rut_soporte || '') + '</td>';
+            html += '<td>' + (soportes[i].id_medios || '') + '</td>';
+            html += '<td>' + (soportes[i].telCelular || '') + '</td>';
             html += '<td><a href="#" onclick="editSoporte(' + (soportes[i].id || '') + '); return false;">Editar</a> | <a href="#" onclick="deleteSoporte(' + (soportes[i].id || '') + '); return false;">Eliminar</a></td>';
             html += '</tr>';
         }
@@ -323,11 +323,17 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="col-6">
                   
                                 <p><input class="form-control" placeholder="Nombre Identificador" name="nombreIdentificador"></p>
-                                <select class="form-select mb-3" name="id_medios" id="id_medios">
-                    <?php foreach ($medios as $medio) : ?>
-                        <option value="<?php echo $medio['id']; ?>"><?php echo $medio['NombredelMedio']; ?></option>
-                    <?php endforeach; ?>
-                </select>
+                                <div class="dropdown" id="dropdown">
+    <button type="button" class="dropdown-button">Select Medios</button>
+    <div class="dropdown-content">
+        <?php foreach ($medios as $medio) : ?>
+            <label>
+                <input type="checkbox" name="id_medios[]" value="<?php echo $medio['id']; ?>">
+                <?php echo $medio['NombredelMedio']; ?>
+            </label>
+        <?php endforeach; ?>
+    </div>
+</div>
                                 <p><input class="form-control" placeholder="Nombre de Proveedor" name="nombreProveedor"></p>
                                 <p><input class="form-control" placeholder="Nombre de Fantasía" name="nombreFantasia"></p>
                                 
@@ -468,7 +474,30 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="<?php echo $ruta; ?>assets/js/agregarsoporte.js"></script>
 <script src="<?php echo $ruta; ?>assets/js/actualizarproveedor.js"></script>
 <script src="<?php echo $ruta; ?>assets/js/agregarproveedor.js"></script>
+<script>
+    const dropdown = document.querySelector('#dropdown');
+    const dropdownButton = dropdown.querySelector('.dropdown-button');
+    const dropdownContent = dropdown.querySelector('.dropdown-content');
 
+    dropdownButton.addEventListener('click', function(event) {
+        event.stopPropagation(); // Prevent event from bubbling up
+        dropdown.classList.toggle('open');
+    });
+
+    // Close dropdown if clicked outside
+    window.addEventListener('click', function(event) {
+        if (!dropdown.contains(event.target)) {
+            dropdown.classList.remove('open');
+        }
+    });
+
+    // Prevent event propagation on checkboxes
+    document.querySelectorAll('.dropdown-content input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent event from bubbling up
+        });
+    });
+</script>
 
 <script>document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('agregarSoportessss');
@@ -483,6 +512,7 @@ document.addEventListener('DOMContentLoaded', function() {
         idInput.value = idProveedor;
     });
 });</script>
+
 <script>
 function loadProveedorData(button) {
     var idProveedor = button.getAttribute('data-idproveedor');
