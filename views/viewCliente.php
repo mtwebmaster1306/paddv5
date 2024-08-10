@@ -36,60 +36,12 @@ if (empty($cliente) || !isset($cliente[0])) {
     die("No se encontró el cliente con el ID proporcionado.");
 }
 
-//////funcion para comision
-
-// Función actualizada para obtener el formato de comisión
-function getFormatoComision($idFormatoComision) {
-  $url = "https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/formatoComision?id_formatoComision=eq.$idFormatoComision&select=*";
-  $formato = makeRequest($url);
-  
-  // Añadir información de depuración
-  echo "URL de solicitud de formato: " . $url . "<br>";
-  echo "Respuesta de formato: <pre>" . print_r($formato, true) . "</pre>";
-  
-  if (!empty($formato) && isset($formato[0]['nombreComision'])) {
-      return $formato[0]['nombreComision'];
-  }
-  return 'Desconocido';
-}
 
 
 
 
-// Función actualizada para obtener la comisión del cliente
-function getComisionCliente($idCliente) {
-  $url = "https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Comisiones?id_cliente=eq.$idCliente&select=*";
-  $comision = makeRequest($url);
-  
-  // Añadir información de depuración
-  echo "URL de solicitud de comisión: " . $url . "<br>";
-  echo "Respuesta de comisión: <pre>" . print_r($comision, true) . "</pre>";
-  
-  if (!empty($comision) && isset($comision[0])) {
-      $comisionData = $comision[0];
-      $formatoComision = getFormatoComision($comisionData['id_formatoComision']);
-      
-      // Asegúrate de que este campo se llame 'id_moneda' en la tabla Comisiones
-      echo "ID de moneda en comisión: " . $comisionData['id_moneda'] . "<br>";
-      $nombreMoneda = getTipoMoneda($comisionData['id_moneda']);
-      
-      return [
-          'valor' => $comisionData['valorComision'],
-          'formato' => $formatoComision,
-          'inicio' => $comisionData['inicioComision'],
-          'fin' => $comisionData['finComision'],
-          'moneda' => $nombreMoneda
-      ];
-  }
-  return null;
-}
 
-// Obtener la comisión del cliente
-$comisionCliente = getComisionCliente($idCliente);
 
-////////////////////////////////
-$allTipoMoneda = makeRequest("https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/TipoMoneda?select=*");
-echo "Todos los tipos de moneda: <pre>" . print_r($allTipoMoneda, true) . "</pre>";
 
 
 include '../componentes/header.php';
@@ -356,17 +308,17 @@ include '../componentes/sidebar.php';
             </tr>
         </thead>
         <tbody>
-        <?php if ($comisionCliente): ?>
+        
 
-                <tr><td><?php echo htmlspecialchars($comisionCliente['moneda']); ?></td>
-                    <td><?php echo htmlspecialchars($comisionCliente['valor']); ?></td>
-                    <td><?php echo htmlspecialchars($comisionCliente['formato']); ?></td>
+                <tr><td>Comision</td>
+                    <td>Formato</td>
+                    
                     <td>Valor</td>
                     <td>Fecha de Inicio</td>
                     <td>Fecha de Termino</td>
                     <td>Acciones</td>
                 </tr>
-                <?php endif; ?>
+                
         </tbody>
     </table>
 

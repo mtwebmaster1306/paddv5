@@ -42,18 +42,3 @@ foreach ($tiposCliente as $tipocliente) {
     $tipoclientesMap[$tipocliente['id_tyipoCliente']] = $tipocliente;
 }
 
-
-function getTipoMoneda($idMoneda) {
-    $url = "https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/TipoMoneda?id_moneda=eq.$idMoneda&select=*";
-    $moneda = makeRequest($url);
-    
-    // Añadir información de depuración
-    echo "URL de solicitud de moneda: " . $url . "<br>";
-    echo "ID de moneda solicitado: " . $idMoneda . "<br>";
-    echo "Respuesta de moneda: <pre>" . print_r($moneda, true) . "</pre>";
-    
-    if (!empty($moneda) && isset($moneda[0]['nombreMoneda'])) {
-        return $moneda[0]['nombreMoneda'];
-    }
-    return 'Desconocido (ID: ' . $idMoneda . ')';
-}
