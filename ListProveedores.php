@@ -83,7 +83,6 @@ include 'componentes/sidebar.php';
                                                             $id_proveedor = $proveedor['id_proveedor'];
 
                                                             // Realiza la solicitud para obtener los datos de la tabla proveedor_medios
-                                                            $proveedor_medios = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/proveedor_medios?select=*');
 
                                                             $id_medios_array = [];
                                                             foreach ($proveedor_medios as $fila) {
@@ -93,7 +92,7 @@ include 'componentes/sidebar.php';
                                                             }
                                                         
                                                             // Paso 2: Obtener los nombres de los medios correspondientes
-                                                            $medios = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Medios?select=*');
+                                                         
 
                                                             $medios_nombres = [];
                                                             foreach ($medios as $medio) {
@@ -364,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="col-6">
                   
                                 <p><input class="form-control" placeholder="Nombre Identificador" name="nombreIdentificador"></p>
-                                <div class="dropdown" id="dropdown">
+                                <div class="dropdown" id="dropdown1">
     <button type="button" class="dropdown-button">Select Medios</button>
     <div class="dropdown-content">
         <?php foreach ($medios as $medio) : ?>
@@ -433,6 +432,9 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
 //fin editar modal
 
+
+//MODAL AGREGAR SOPORTESS
+
 <div class="modal fade" id="agregarSoportessss" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -450,11 +452,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="row">
                         <div class="col-6">
                             <p><input class="form-control" placeholder="Nombre Identificador" name="nombreIdentficiador" required></p>
-                            <select class="form-select mb-3" name="id_medios" id="id_medios">
-                    <?php foreach ($medios as $medio) : ?>
-                        <option value="<?php echo $medio['id']; ?>"><?php echo $medio['NombredelMedio']; ?></option>
-                    <?php endforeach; ?>
-                </select>
+                            <div class="dropdown" id="dropdown2">
+    <button type="button" class="dropdown-button">Select Medios</button>
+    <div class="dropdown-content">
+        <?php foreach ($medios as $medio) : ?>
+            <label>
+                <input type="checkbox" name="id_medios[]" value="<?php echo $medio['id']; ?>">
+                <?php echo $medio['NombredelMedio']; ?>
+            </label>
+        <?php endforeach; ?>
+    </div>
+</div>
                 <p><input class="form-control" placeholder="Razón Social" name="razonSocial"></p>
                             <p><input class="form-control" placeholder="Nombre de Fantasía" name="nombreFantasia" required></p>
                         </div>
@@ -516,28 +524,32 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="<?php echo $ruta; ?>assets/js/actualizarproveedor.js"></script>
 <script src="<?php echo $ruta; ?>assets/js/agregarproveedor.js"></script>
 <script>
-    const dropdown = document.querySelector('#dropdown');
+   function setupDropdown(dropdownId) {
+    const dropdown = document.querySelector(`#${dropdownId}`);
     const dropdownButton = dropdown.querySelector('.dropdown-button');
     const dropdownContent = dropdown.querySelector('.dropdown-content');
 
     dropdownButton.addEventListener('click', function(event) {
-        event.stopPropagation(); // Prevent event from bubbling up
+        event.stopPropagation();
         dropdown.classList.toggle('open');
     });
 
-    // Close dropdown if clicked outside
     window.addEventListener('click', function(event) {
         if (!dropdown.contains(event.target)) {
             dropdown.classList.remove('open');
         }
     });
 
-    // Prevent event propagation on checkboxes
-    document.querySelectorAll('.dropdown-content input[type="checkbox"]').forEach(checkbox => {
+    dropdown.querySelectorAll('.dropdown-content input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('click', function(event) {
-            event.stopPropagation(); // Prevent event from bubbling up
+            event.stopPropagation();
         });
     });
+}
+
+// Inicializa los dropdowns
+setupDropdown('dropdown1');
+setupDropdown('dropdown2');
 </script>
 
 <script>document.addEventListener('DOMContentLoaded', () => {
