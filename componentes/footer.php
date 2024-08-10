@@ -20,6 +20,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
      <!--<script src="assets/js/formulariomultipass.js"></script>
    JS Libraies -->
+   
    <script src="<?php echo $ruta; ?>assets/bundles/datatables/datatables.min.js"></script>
   <script src="<?php echo $ruta; ?>assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
   <script src="<?php echo $ruta; ?>assets/bundles/jquery-ui/jquery-ui.min.js"></script>
