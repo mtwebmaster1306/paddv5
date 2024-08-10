@@ -124,3 +124,15 @@ ul.navbar-nav.navbar-right.duo {
   background: transparent;
   padding: 0px;
 }
+.table > thead {
+  vertical-align: bottom;
+  font-size: 12px !important;
+}
+.table > tbody {
+  vertical-align: inherit;
+  font-size: 12px;
+}
+.titulox.am {
+  font-size: 14px;
+  font-weight: 700;
+}

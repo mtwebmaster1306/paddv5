@@ -309,15 +309,9 @@ include '../componentes/sidebar.php';
                       </div>
 
                       <div class="tab-pane fade" id="otros" role="tabpanel" aria-labelledby="profile-tab3">
-                        <div class="card-header milinea">
-                            <div class="titulox am">Listado de Comisiones</div>
-                            <div class="agregar">
-                              <a href="#" 
-       class="btn btn-primary open-modal" 
-       data-bs-toggle="modal" 
-       data-bs-target="#comisionModal">
-        <i class="fas fa-plus-circle"></i> Agregar Comisión
-    </a></div>
+                       <div class="card-header milinea">
+                            <div class="titulox"><h4>Listado de Comisiones</h4></div>
+                            <div class="agregar"><a class="btn btn-primary" href="addCliente.php"><i class="fas fa-plus-circle"></i> Agregar Comisión</a></div>
                         </div>
                        <table class="table table-bordered text-center">
         <thead>
@@ -337,7 +331,7 @@ include '../componentes/sidebar.php';
                 <tr>
                 <td><?php echo htmlspecialchars($monedasMap[$comision['id_tipoMoneda']] ?? 'No disponible'); ?>
                 </td>
-                    <td><?php echo htmlspecialchars($comision['valorComision'] ?? 'No disponible'); ?></td>
+                    <td><?php echo htmlspecialchars($valorComision); ?></td>
                     
                     <td><?php echo htmlspecialchars($formatosMap[$comision['id_formatoComision']] ?? 'No disponible'); ?></td>
                     <td><?php echo htmlspecialchars($fechaInicio); ?></td>
@@ -521,176 +515,5 @@ include '../componentes/sidebar.php';
           
         </div>
       </div>
-
-
-
-
-
-<div class="modal fade" id="comisionModal" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="formModal">AGREGAR COMISIÓN</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                 <!-- Alerta para mostrar el resultado de la actualización -->
-                 <div id="updateAlert" class="alert" style="display:none;" role="alert"></div>
-                            
-                 
-              <form id="updateMedioForm">
-    <input type="hidden" name="id_cliente" value="<?php echo $idCliente; ?>">
-    <div class="form-group">
-        <label for="NombreMoneda">Comisión</label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-money-bill-alt"></i></span>
-            </div>
-             <select class="form-control" id="nombreMoneda" name="nombreMoneda">
-                                <?php foreach ($monedas as $moneda): ?>
-                                    <option value="<?php echo htmlspecialchars($moneda['id_moneda']); ?>">
-                                        <?php echo htmlspecialchars($moneda['nombreMoneda']); ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="codigo">Valor</label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
-            </div>
-            <input type="text" class="form-control" id="valorComision" name="valorComision">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="NombreFormato">Formato</label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-percent"></i></span>
-            </div>
-            <select class="form-control" id="nombreFormato" name="nombreFormato">
-                                <?php foreach ($formatos as $formato): ?>
-                                    <option value="<?php echo htmlspecialchars($formato['id_formatoComision']); ?>">
-                                        <?php echo htmlspecialchars($formato['nombreFormato']); ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-        </div>
-    </div>
-
-     <div class="form-group">
-        <label for="inicioComision">Fecha Inicio</label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-            </div>
-            <input type="date" class="form-control" id="inicioComision" name="inicioComision">
-        </div>
-    </div>
-
-     <div class="form-group">
-        <label for="finComision">Fecha Término</label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-            </div>
-            <input type="date" class="form-control" id="finComision" name="finComision">
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Guardar Comisión</button>
-</form>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('updateMedioForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const formData = new FormData(this);
-        const valorComisionIngresado = formData.get('valorComision');
-        console.log('Valor de comisión ingresado:', valorComisionIngresado); // Para depuración
-
-        const data = {
-            id_cliente: parseInt(formData.get('id_cliente')),
-            id_tipoMoneda: parseInt(formData.get('nombreMoneda')),
-            id_formatoComision: parseInt(formData.get('nombreFormato')),
-            valorComision: parseFloat(valorComisionIngresado), // Asegúrate de que esto sea un número
-            inicioComision: formData.get('inicioComision'),
-            finComision: formData.get('finComision')
-        };
-
-        console.log('Datos a enviar:', data); // Para depuración
-
-        fetch('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Comisiones', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.text().then(text => {
-                    throw new Error(`HTTP error! status: ${response.status}, message: ${text}`);
-                });
-            }
-            return response.text().then(text => {
-                return text ? JSON.parse(text) : {};
-            });
-        })
-        .then(result => {
-            console.log('Respuesta del servidor:', result);
-            
-            // Cerrar el modal
-            $('#comisionModal').modal('hide');
-
-            // Obtener la URL actual
-            let currentUrl = new URL(window.location.href);
-            let searchParams = currentUrl.searchParams;
-
-            // Actualizar o añadir el parámetro 'tab'
-            searchParams.set('tab', 'otros');
-
-            // Redirigir a la misma página con los parámetros actualizados
-            window.location.href = currentUrl.pathname + '?' + searchParams.toString();
-        })
-        .catch(error => {
-            console.error('Error en la solicitud:', error);
-            const alertElement = document.getElementById('updateAlert');
-            if (alertElement) {
-                alertElement.className = 'alert alert-danger';
-                alertElement.innerText = `Error al realizar la solicitud: ${error.message}`;
-                alertElement.style.display = 'block';
-            }
-        });
-    });
-
-    // Código para activar el tab correcto al cargar la página
-    const urlParams = new URLSearchParams(window.location.search);
-    const tabToActivate = urlParams.get('tab');
-    if (tabToActivate === 'otros') {
-        const otrosTab = document.querySelector('a[href="#otros"]');
-        if (otrosTab) {
-            const tab = new bootstrap.Tab(otrosTab);
-            tab.show();
-        }
-    }
-});
-</script>
-
-
-
-
-
-
 <?php include '../componentes/settings.php'; ?>
 <?php include '../componentes/footer.php'; ?>
