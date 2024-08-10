@@ -70,8 +70,7 @@ function obtenerValoresFormulario(event) {
         cliente: form.cliente.value,
         idTipoCliente: form.idTipoCliente.value,
         nombreProducto: form.nombreProducto.value,
-        razonSocial: form.razonSocial.value,
-        agencia: form.agencia.value,
+        razonSocial: form.razonSocial.value
     };
 
  
