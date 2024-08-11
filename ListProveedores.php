@@ -138,7 +138,18 @@ include 'componentes/sidebar.php';
         </tr>
         <tr class="expandable-row" id="subtable-<?php echo $proveedor['id_proveedor']; ?>" style="display:none;">
             <td colspan="8">
-                <!-- Subtabla --><div class="card-header milinea"><div class="titulox"><h4>Listado de Proveedores</h4></div><div class="agregar"><button type="button" class="btn btn-success micono" data-bs-toggle="modal" data-bs-target="#agregarSoportessss" data-id="<?php echo $proveedor['id_proveedor']; ?><i class="fas fa-plus-circle"></i> <?php echo $proveedor['id_proveedor']; ?> Agregar Soporte</button></div></div>
+                <!-- Subtabla --><div class="card-header milinea"><div class="titulox"><h4>Listado de Proveedores</h4></div><div class="agregar"><button type="button" class="btn btn-success micono" data-bs-toggle="modal" data-bs-target="#agregarSoportessss"  data-rso="<?php echo $proveedor['razonSocial']; ?>"
+                        data-nfo="<?php echo $proveedor['nombreFantasia']; ?>"              
+                        data-rpo="<?php echo $proveedor['rutProveedor']; ?>"
+                        data-gpo="<?php echo $proveedor['giroProveedor']; ?>"
+                        data-nro="<?php echo $proveedor['nombreRepresentante']; ?>"            
+                        data-rpoo="<?php echo $proveedor['rutRepresentante']; ?>"                     
+                        data-dfo="<?php echo $proveedor['direccionFacturacion']; ?>"             
+                        data-iro="<?php echo $proveedor['id_region']; ?>"   
+                        data-ico="<?php echo $proveedor['id_comuna']; ?>"        
+                        data-tco="<?php echo $proveedor['telCelular']; ?>" 
+                        data-tfo="<?php echo $proveedor['telFijo']; ?>" 
+                        data-elo="<?php echo $proveedor['email']; ?>" data-id="<?php echo $proveedor['id_proveedor']; ?>"><i class="fas fa-plus-circle"></i> <?php echo $proveedor['id_proveedor']; ?> Agregar Soporte</button></div></div>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -541,38 +552,44 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="modal fade" id="agregarSoportessss" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
+     
             <div class="modal-body">
                 <form id="formualarioSoporte">
                     <!-- Campo oculto para el ID -->
-                    <input  name="id_proveedor" id="id_proveedor">
+                    <input type="hidden"  name="id_proveedor" id="id_proveedor">
                     <!-- Campos del formulario -->
                     <h3 class="titulo-registro mb-3">Agregar Soporte</h3>
                     <div class="row">
                         <div class="col-6">
-                            <p><input class="form-control" placeholder="Nombre Identificador" name="nombreIdentficiador" required></p>
-                            <div class="dropdown" id="dropdown2">
-    <button type="button" class="dropdown-button">Select Medios</button>
-    <div class="dropdown-content">
-        <?php foreach ($medios as $medio) : ?>
-            <label>
-                <input type="checkbox" name="id_medios[]" value="<?php echo $medio['id']; ?>">
-                <?php echo $medio['NombredelMedio']; ?>
-            </label>
-        <?php endforeach; ?>
-    </div>
-</div>
-                <p><input class="form-control" placeholder="Razón Social" name="razonSocial"></p>
-                            <p><input class="form-control" placeholder="Nombre de Fantasía" name="nombreFantasia" required></p>
+                                <p><input class="form-control" placeholder="Nombre Identificador" name="nombreIdentficiador" required></p> 
+                               
                         </div>
                         <div class="col-6">
-                            <p><input class="form-control" placeholder="Rut" name="rut_soporte" required></p>
+                        <div class="dropdown" id="dropdown2">
+                                        <button type="button" class="dropdown-button">Select Medios</button>
+                                        <div class="dropdown-content">
+                                            <?php foreach ($medios as $medio) : ?>
+                                                <label>
+                                                    <input type="checkbox" name="id_medios[]" value="<?php echo $medio['id']; ?>">
+                                                    <?php echo $medio['NombredelMedio']; ?>
+                                                </label>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                        </div>
+              
+                    </div>
+                    <div class="row"><label class="opeo"><input type="checkbox" name="revision"> <span>Usar los mismos datos del proveedor</span></label></div>
+                   <div class="checklust">
+                   <div class="row ">
+                        <div class="col-6">
+                            <p><input class="form-control" placeholder="Razón Social" name="razonSocial"></p>
+                            <p><input class="form-control" placeholder="Rut" name="rut_soporte" required></p>   
+                            <p><input class="form-control" placeholder="Nombre Representante Legal" name="nombreRepresentanteLegal" required></p>  
+                        </div>
+                        <div class="col-6">
+                            <p><input class="form-control" placeholder="Nombre de Fantasía" name="nombreFantasia" required></p>
                             <p><input class="form-control" placeholder="Giro" name="giro" required></p>
-                            <p><input class="form-control" placeholder="Nombre Representante Legal" name="nombreRepresentanteLegal" required></p>
                             <p><input class="form-control" placeholder="Rut Representante" name="rutRepresentante" required></p>
                         </div>
                     </div>
@@ -581,27 +598,47 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="row">
                         <div class="col-6">
                                 <p><input class="form-control" placeholder="Dirección Facturación" name="direccion"></p>
-                                <select class="form-select mb-3" name="id_region" id="region" required>
-    <?php foreach ($regiones as $regione) : ?>
-        <option value="<?php echo $regione['id']; ?>"><?php echo $regione['nombreRegion']; ?></option>
-    <?php endforeach; ?>
-</select>
-<select class="form-select mb-3" name="id_comuna" id="comuna" required>
-    <?php foreach ($comunas as $comuna) : ?>
-        <option value="<?php echo $comuna['id_comuna']; ?>" data-region="<?php echo $comuna['id_region']; ?>">
-            <?php echo $comuna['nombreComuna']; ?>
-        </option>
-    <?php endforeach; ?>
-</select>
+                                <select class="foulou form-select mb-3" name="id_region" id="region" required>
+                                    <?php foreach ($regiones as $regione) : ?>
+                                        <option value="<?php echo $regione['id']; ?>"><?php echo $regione['nombreRegion']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                    <p><input class="form-control" placeholder="Teléfono celular" name="telCelular" required></p>
                                 
-                            </div>
-                            <div class="col-6">
-                                <p><input class="form-control" placeholder="Teléfono celular" name="telCelular" required></p>
-                                <p><input class="form-control" placeholder="Teléfono fijo" name="telFijo" required></p>
-                                <p><input class="form-control" placeholder="Email" name="email"></p>
-                            </div>
+                                    </div>
+                        <div class="col-6">
+                            <p><input class="form-control" placeholder="Email" name="email"></p>
+                            <select class="foulou form-select mb-3" name="id_comuna" id="comuna" required>
+                                <?php foreach ($comunas as $comuna) : ?>
+                                    <option value="<?php echo $comuna['id_comuna']; ?>" data-region="<?php echo $comuna['id_region']; ?>">
+                                        <?php echo $comuna['nombreComuna']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <p><input class="form-control" placeholder="Teléfono fijo" name="telFijo" required></p>    
                         </div>
+                    </div>
+                   </div>
+                    
+                    </div>
+                    <div>
                         <h3 class="titulo-registro mb-3">Otros datos</h3>
+
+
+                                  
+
+                        <input name="razonsoculto" type="hidden">
+                        <input name="nombref" type="hidden">
+                        <input name="rutt" type="hidden">
+                        <input name="giroo" type="hidden">
+                        <input name="nombreRepesentanteO" type="hidden">
+                        <input name="rutRepresent" type="hidden">
+                        <input name="direcciono" type="hidden">
+                        <input name="regiono" type="hidden">
+                        <input name="comunao" type="hidden">
+                        <input name="telCelularo" type="hidden">
+                        <input name="telFijoo" type="hidden">
+                        <input name="emailO" type="hidden">
                         <div class="row">
                             <div class="col">
                                 <p><input class="form-control" placeholder="Bonificación por año %" name="bonificacion_ano" required></p>
@@ -610,8 +647,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <p><input class="form-control" placeholder="Escala de rango" name="escala_rango" required></p>
                             </div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="provprov">Guardar cambios</button>
+                    </div> 
+                    <button type="submit" class="loiloi" id="provprov">Guardar cambios</button>
                 </form>
             </div>
         </div>
@@ -626,6 +663,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="<?php echo $ruta; ?>assets/js/agregarsoporte.js"></script>
 <script src="<?php echo $ruta; ?>assets/js/actualizarproveedor.js"></script>
 <script src="<?php echo $ruta; ?>assets/js/agregarproveedor.js"></script>
+
 <script>
    function setupDropdown(dropdownId) {
     const dropdown = document.querySelector(`#${dropdownId}`);
@@ -655,19 +693,62 @@ setupDropdown('dropdown1');
 setupDropdown('dropdown2');
 </script>
 
-<script>document.addEventListener('DOMContentLoaded', () => {
+<script>
+document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('agregarSoportessss');
 
     modal.addEventListener('show.bs.modal', (event) => {
-        // Obtener el ID del botón que abrió el modal
+        // Obtener el botón que abrió el modal
         const button = event.relatedTarget;
-        const idProveedor = button.getAttribute('data-id');
 
-        // Asignar el ID al input oculto en el modal
+        // Asignar el ID del proveedor al input oculto en el modal
+        const idProveedor = button.getAttribute('data-id');
         const idInput = modal.querySelector('#id_proveedor');
         idInput.value = idProveedor;
+
+        // Asignar los valores de los atributos data-* a los inputs ocultos en el modal
+        modal.querySelector('input[name="razonsoculto"]').value = button.getAttribute('data-rso');
+        modal.querySelector('input[name="nombref"]').value = button.getAttribute('data-nfo');
+        modal.querySelector('input[name="rutt"]').value = button.getAttribute('data-rpo');
+        modal.querySelector('input[name="giroo"]').value = button.getAttribute('data-gpo');
+        modal.querySelector('input[name="nombreRepesentanteO"]').value = button.getAttribute('data-nro');
+        modal.querySelector('input[name="rutRepresent"]').value = button.getAttribute('data-rpoo');
+        modal.querySelector('input[name="direcciono"]').value = button.getAttribute('data-dfo');
+        modal.querySelector('input[name="regiono"]').value = button.getAttribute('data-iro');
+        modal.querySelector('input[name="comunao"]').value = button.getAttribute('data-ico');
+        modal.querySelector('input[name="telCelularo"]').value = button.getAttribute('data-tco');
+        modal.querySelector('input[name="telFijoo"]').value = button.getAttribute('data-tfo');
+        modal.querySelector('input[name="emailO"]').value = button.getAttribute('data-elo');
     });
-});</script>
+    const checkbox = modal.querySelector('input[name="revision"]');
+    const checklustElements = modal.querySelectorAll('.checklust');
+    const form = document.getElementById('formualarioSoporte');
+
+    const toggleChecklustVisibility = () => {
+        checklustElements.forEach(element => {
+            element.style.display = checkbox.checked ? 'none' : 'grid';
+        });
+    };
+
+    // Escuchar el evento 'change' en el checkbox
+    checkbox.addEventListener('change', toggleChecklustVisibility);
+   checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            checklustElements.forEach(el => el.style.display = 'none');
+            form.querySelectorAll('.form-control').forEach(input => input.removeAttribute('required'));
+        } else {
+            checklustElements.forEach(el => el.style.display = '');
+            form.querySelectorAll('.form-control').forEach(input => input.setAttribute('required', 'required'));
+        }
+    });
+
+    form.addEventListener('submit', submitFormSoporte);
+    // Inicializar la visibilidad al cargar el modal
+    modal.addEventListener('show.bs.modal', () => {
+        toggleChecklustVisibility();
+    });
+});
+</script>
 
 <script>
 function loadProveedorData(button) {
