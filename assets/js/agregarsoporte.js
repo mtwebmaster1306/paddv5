@@ -49,27 +49,52 @@ async function submitFormSoporte(event) {
 
     const formData = getFormDataSoporte();
     const nuevoIdSoporte = await obtenerNuevoIdSoporte(); // Obtener el nuevo ID
-
-    const soporteData = {
-        id_soporte: nuevoIdSoporte, // Incluir el ID generado
-        created_at: formData.created_at,
-        id_proveedor: formData.id_proveedor, // Captura el ID del proveedor
-        nombreIdentficiador: formData.nombreIdentficiador,
-        razonSocial: formData.razonSocial,
-        nombreFantasia: formData.nombreFantasia,
-        rut_soporte: formData.rut_soporte,
-        giro: formData.giro,
-        nombreRepresentanteLegal: formData.nombreRepresentanteLegal,
-        rutRepresentante: formData.rutRepresentante,
-        direccion: formData.direccion,
-        id_region: formData.id_region,
-        id_comuna: formData.id_comuna,
-        telCelular: formData.telCelular,
-        telFijo: formData.telFijo,
-        email: formData.email || null,
-        bonificacion_ano: formData.bonificacion_ano,
-        escala: formData.escala
-    };
+    let soporteData;
+    if (formData.revision === "on") {
+        // Usar los datos del proveedor
+        soporteData = {
+            id_soporte: nuevoIdSoporte,
+            created_at: formData.created_at,
+            id_proveedor: formData.id_proveedor,
+            nombreIdentficiador: formData.nombreIdentficiador,
+            razonSocial: formData.razonsoculto,
+            nombreFantasia: formData.nombref,
+            rut_soporte: formData.rutt,
+            giro: formData.giroo,
+            nombreRepresentanteLegal: formData.nombreRepesentanteO,
+            rutRepresentante: formData.rutRepresent,
+            direccion: formData.direcciono,
+            id_region: formData.regiono,
+            id_comuna: formData.comunao,
+            telCelular: formData.telCelularo,
+            telFijo: formData.telFijoo,
+            email: formData.emailO || null,
+            bonificacion_ano: formData.bonificacion_ano,
+            escala: formData.escala
+        };
+    } else {
+        // Usar los datos ingresados manualmente
+        soporteData = {
+            id_soporte: nuevoIdSoporte,
+            created_at: formData.created_at,
+            id_proveedor: formData.id_proveedor,
+            nombreIdentficiador: formData.nombreIdentficiador,
+            razonSocial: formData.razonSocial,
+            nombreFantasia: formData.nombreFantasia,
+            rut_soporte: formData.rut_soporte,
+            giro: formData.giro,
+            nombreRepresentanteLegal: formData.nombreRepresentanteLegal,
+            rutRepresentante: formData.rutRepresentante,
+            direccion: formData.direccion,
+            id_region: formData.id_region,
+            id_comuna: formData.id_comuna,
+            telCelular: formData.telCelular,
+            telFijo: formData.telFijo,
+            email: formData.email || null,
+            bonificacion_ano: formData.bonificacion_ano,
+            escala: formData.escala
+        };
+    }
 
     try {
         // Registrar el soporte
