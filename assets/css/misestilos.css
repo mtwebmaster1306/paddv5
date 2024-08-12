@@ -219,7 +219,37 @@ body.loading:after {
 .custom-switch.sino {
   padding: 0px !important;
 }
+
+
+.banner-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #ef4d36;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 24px;
+}
+.banner-img i {
+  color: #fff;
+  font-size: 25px;
+}
+li.items-list-compo i {
+  font-size: 35px;
+  color: #ef4d36;
+  margin-right: 20px;
+}
+.w-100{
+  width: 100%;
+}
+.ttc{
+  text-transform: capitalize;
+=======
 .titulo-registro {
   color: #ef4d36;
   font-size: 15px;
+
 }

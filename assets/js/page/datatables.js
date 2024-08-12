@@ -47,17 +47,23 @@ $('#save-stage').DataTable({
 $('#tableExport').DataTable({
   dom: 'Bfrtip',
   buttons: [
-   'csv', 'excel'
+    'csv', 'excel'
   ]
+});
+
+$('#tableBuscar').DataTable({
+  language: {
+    url: '//cdn.datatables.net/plug-ins/2.1.3/i18n/es-MX.json',
+  }
 });
 
 $('#tableExportadora').DataTable({
   dom: 'Bfrtip',
   language: {
     url: '//cdn.datatables.net/plug-ins/2.1.3/i18n/es-MX.json',
-},
+  },
   buttons: [
-   
+
     {
       extend: 'csv',
       exportOptions: { columns: ':not(:last-child)' }

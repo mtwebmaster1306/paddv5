@@ -12,7 +12,9 @@ $nombre = $_SESSION['user_name'];
 
 
 
-$ruta = 'https://didactic-rotary-phone-5g47w4rx5x4qhppq9-3000.app.github.dev/';
+
+$ruta = 'http://localhost:3000/';
+
 
 
 
