@@ -12,7 +12,8 @@ $nombre = $_SESSION['user_name'];
 
 
 
-$ruta = 'https://musical-carnival-556r99pr7p424xxr-3000.app.github.dev/';
+$ruta = 'http://localhost/paddv5/';
+
 
 
 
@@ -40,6 +41,7 @@ $current_file = basename($_SERVER['PHP_SELF']);
 
 
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/css/custom.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/bundles/datatables/datatables.min.css">
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">

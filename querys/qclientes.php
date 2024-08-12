@@ -41,3 +41,4 @@ $tipoclientesMap2 = [];
 foreach ($tiposCliente as $tipocliente) {
     $tipoclientesMap[$tipocliente['id_tyipoCliente']] = $tipocliente;
 }
+
