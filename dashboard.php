@@ -27,6 +27,7 @@ include 'querys/qdashboard.php';
   <section class="section">
     <div class="row ">
       <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+ 
         <div class="card">
           <div class="card-statistic-4">
             <div class="align-items-center justify-content-between">
@@ -38,7 +39,7 @@ include 'querys/qdashboard.php';
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pl-0">
-                  <div class="banner-img">
+                  <div class="banner-img ">
                     <i class="fas fa-sort-numeric-up"></i>
                   </div>
                 </div>

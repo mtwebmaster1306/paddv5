@@ -219,9 +219,22 @@ body.loading:after {
 .custom-switch.sino {
   padding: 0px !important;
 }
+
+.banner-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #ef4d36;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 24px;
+}
 .banner-img i {
-  color: #EF4D36;
-  font-size: 40px;
+  color: #fff;
+  font-size: 25px;
 }
 li.items-list-compo i {
   font-size: 35px;
