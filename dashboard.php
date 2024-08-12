@@ -35,7 +35,6 @@ include 'querys/qdashboard.php';
                   <div class="card-content">
                     <h5 class="font-15">Cantidad Agencias</h5>
                     <h2 class="mb-3 font-18"><?php echo $agenciasCount; ?></h2>
-                    <p class="mb-0"><span class="col-green">10%</span> Increase</p>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pl-0">
@@ -58,7 +57,6 @@ include 'querys/qdashboard.php';
                   <div class="card-content">
                     <h5 class="font-15">Cantidad de Clientes</h5>
                     <h2 class="mb-3 font-18"><?php echo $clientesCount; ?></h2>
-                    <p class="mb-0"><span class="col-orange">09%</span> Decrease</p>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pl-0">
@@ -80,8 +78,7 @@ include 'querys/qdashboard.php';
                   <div class="card-content">
                     <h5 class="font-15">Total campañas</h5>
                     <h2 class="mb-3 font-18"><?php echo $campaignsCount; ?></h2>
-                    <p class="mb-0"><span class="col-green">18%</span>
-                            Increase</p>
+                
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pl-0">
@@ -103,7 +100,7 @@ include 'querys/qdashboard.php';
                   <div class="card-content">
                     <h5 class="font-15">Cantidad de medios</h5>
                     <h2 class="mb-3 font-18"><?php echo $mediosCount; ?></h2>
-                    <p class="mb-0"><span class="col-green">42%</span> Increase</p>
+          
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pl-0">
