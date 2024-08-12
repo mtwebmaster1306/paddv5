@@ -12,7 +12,7 @@ $nombre = $_SESSION['user_name'];
 
 
 
-$ruta = 'http://localhost/paddv5/';
+$ruta = 'http://localhost:3000/';
 
 
 

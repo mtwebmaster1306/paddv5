@@ -39,8 +39,7 @@ include 'querys/qdashboard.php';
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pl-0">
                   <div class="banner-img">
-                    <i class="fas fa-sort-numeric-up-alt"></i>
-
+                    <i class="fas fa-sort-numeric-up"></i>
                   </div>
                 </div>
               </div>
@@ -78,7 +77,7 @@ include 'querys/qdashboard.php';
                   <div class="card-content">
                     <h5 class="font-15">Total campañas</h5>
                     <h2 class="mb-3 font-18"><?php echo $campaignsCount; ?></h2>
-                
+
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pl-0">
@@ -100,12 +99,12 @@ include 'querys/qdashboard.php';
                   <div class="card-content">
                     <h5 class="font-15">Cantidad de medios</h5>
                     <h2 class="mb-3 font-18"><?php echo $mediosCount; ?></h2>
-          
+
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pl-0">
                   <div class="banner-img">
-                    <i class="fa-solid fa-photo-film"></i>
+                    <i class="fas fa-image"></i>
 
                   </div>
                 </div>
@@ -128,40 +127,36 @@ include 'querys/qdashboard.php';
         </div>
       </div>
       <div class="col-6 col-sm-6 col-lg-6">
+
         <div class="card">
           <div class="card-header">
-            <h4>Medios</h4>
+            <h4>Aviso</h4>
           </div>
           <div class="card-body">
+            <ul class="list-unstyled list-unstyled-border user-list" id="message-list">
+              <?php foreach ($avisos as $aviso): ?>
 
-            <div class="table-responsive">
-              <table class="table table-striped" id="tableBuscar">
-                <thead>
-                  <tr>
-                    <th>COD</th>
-                    <th>Nombre del Medio</th>
-                    <th>Estado</th>
-              
-                  </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($medios as $medio): ?>
-                  <tr>
-                  <td><?php echo $medio['codigo']; ?></td>
-                 <td><?php  echo $medio['NombredelMedio']?></td>
-                 <td><?php  echo $medio['Estado']?></td>
-                  </tr>
-                  <?php endforeach; ?>
-                </tbody>
-              </table>
-            </div>
+                <li class="items-list-compo">
+                <i class="fas fa-inbox"></i>
+                  <div class="media-body w-100">
+                    <div class="mt-0 fw-bold ttc"><?php echo $aviso['mensaje'] ?></div>
+                    <div  class="text-small"> Fecha de creación: <?php echo formatDate($aviso['created_at']); ?></div>
+                    <div class="badge badge-pill badge-primary  float-right">Realizado</div>
+                  </div>
+                </li>
+                </tr>
+              <?php endforeach; ?>
+
+
+            </ul>
           </div>
         </div>
+
 
       </div>
     </div>
 
-    
+
 
   </section>
   <div class="settingSidebar">
