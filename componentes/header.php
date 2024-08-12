@@ -11,7 +11,10 @@ if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
 $nombre = $_SESSION['user_name'];
 
 
+
 $ruta = 'http://localhost/paddv5/';
+
+
 
 
 $current_file = basename($_SERVER['PHP_SELF']);
@@ -30,10 +33,13 @@ $current_file = basename($_SERVER['PHP_SELF']);
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/css/app.min.css">
   <!-- Template CSS -->
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/css/formulario.css">
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/css/style.css">
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/css/components.css">
   <!-- Custom style CSS -->
+
+
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/css/custom.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
