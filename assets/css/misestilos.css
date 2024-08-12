@@ -219,3 +219,7 @@ body.loading:after {
 .custom-switch.sino {
   padding: 0px !important;
 }
+.titulo-registro {
+  color: #ef4d36;
+  font-size: 15px;
+}
