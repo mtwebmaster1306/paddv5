@@ -9,6 +9,12 @@ include 'componentes/header.php';
 include 'componentes/sidebar.php';
 ?>
 <div class="main-content">
+<nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="<?php echo $ruta; ?>dashboard.php">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Lista de Clientes</li>
+        </ol>
+    </nav><br>
     <section class="section">
         <div class="section-body">
             <div class="row">
@@ -129,10 +135,11 @@ include 'componentes/sidebar.php';
                                         <option value="<?php echo $comuna['id_comuna']; ?>" data-region="<?php echo $comuna['id_region']; ?>"><?php echo $comuna['nombreComuna']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                <p><input class="form-control" placeholder="Teléfono celular" name="telCelular"></p>
+                                
                             </div>
                             <div class="col-6">
                                 <p><input class="form-control" placeholder="Teléfono fijo" name="telFijo"></p>
+                                <p><input class="form-control" placeholder="Teléfono celular" name="telCelular"></p>
                                 <p><input class="form-control" placeholder="Email" name="email"></p>
                             </div>
                         </div>
@@ -236,7 +243,8 @@ include 'componentes/sidebar.php';
     document.getElementById('region').dispatchEvent(new Event('change'));
 
 </script>
+<script src="<?php echo $ruta; ?>assets/js/actualizarcliente.js"></script>
 
-<script src="assets/js/toggleClientes.js"></script>
 <?php include 'componentes/settings.php'; ?>
+<script src="assets/js/toggleClientes.js"></script>
 <?php include 'componentes/footer.php'; ?>
