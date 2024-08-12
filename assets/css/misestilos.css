@@ -223,3 +223,8 @@ body.loading:after {
   color: #ef4d36;
   font-size: 15px;
 }
+.btn.btn-success.micono, .btn.btn-danger.eliminar-producto.micono, .btn.btn-danger.micono.eliminar-comision {
+  height: 28px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
