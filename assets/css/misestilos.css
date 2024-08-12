@@ -220,6 +220,7 @@ body.loading:after {
   padding: 0px !important;
 }
 
+
 .banner-img {
   width: 70px;
   height: 70px;
@@ -246,4 +247,9 @@ li.items-list-compo i {
 }
 .ttc{
   text-transform: capitalize;
+=======
+.titulo-registro {
+  color: #ef4d36;
+  font-size: 15px;
+
 }

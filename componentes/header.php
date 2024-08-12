@@ -12,7 +12,9 @@ $nombre = $_SESSION['user_name'];
 
 
 
+
 $ruta = 'http://localhost:3000/';
+
 
 
 
@@ -69,7 +71,7 @@ $current_file = basename($_SERVER['PHP_SELF']);
         <ul class="navbar-nav navbar-right duo">
    Bienvenid@ - <?php echo htmlspecialchars($nombre); ?>
           <li class="dropdown"><a href="#" data-bs-toggle="dropdown"
-              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="assets/img/cristianImg.png"
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="<?php echo $ruta; ?>assets/img/cristianImg.png"
                 class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
               

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-//Verificar si el usuario ha iniciado sesión
+//Verificar si el usuario ha iniciado sesión//
 if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
   // Si no ha iniciado sesión, redirigir al login
   header("Location: index.php");

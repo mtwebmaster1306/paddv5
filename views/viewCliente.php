@@ -158,54 +158,10 @@ include '../componentes/sidebar.php';
                                         <?php echo $datosCliente['nombreRepresentanteLegal'] ; ?>
                                     </span>
                                 </p>
-                                <p class="clearfix">
-                                    <span class="float-start">
-                                        RUT Representante Legal
-                                    </span>
-                                    <span class="float-right text-muted">
-                                        <?php echo $datosCliente['RUT_representante'] ; ?>
-                                    </span>
-                                </p>
-                                <p class="clearfix">
-                                    <span class="float-start">
-                                        Región
-                                    </span>
-                                    <span class="float-right text-muted">
-                                        <?php echo $regionesMap[$datosCliente['id_region']] ?? ''; ?>
-                                    </span>
-                                </p>
-                                <p class="clearfix">
-                                    <span class="float-start">
-                                        Comuna
-                                    </span>
-                                    <span class="float-right text-muted">
-                                        <?php echo $comunasMap[$datosCliente['id_comuna']] ?? ''; ?>
-                                    </span>
-                                </p>
-                                <p class="clearfix">
-                                    <span class="float-start">
-                                        Dirección Empresa
-                                    </span>
-                                    <span class="float-right text-muted">
-                                        <?php echo $datosCliente['direccionEmpresa'] ; ?>
-                                    </span>
-                                </p>
-                                <p class="clearfix">
-                                    <span class="float-start">
-                                        Teléfono Celular
-                                    </span>
-                                    <span class="float-right text-muted">
-                                        <?php echo $datosCliente['telCelular'] ; ?>
-                                    </span>
-                                </p>
-                                <p class="clearfix">
-                                    <span class="float-start">
-                                        Teléfono Fijo
-                                    </span>
-                                    <span class="float-right text-muted">
-                                        <?php echo $datosCliente['telFijo'] ; ?>
-                                    </span>
-                                </p>
+                        
+                               
+                             
+                               
                             </div>
                         </div>
                     </div>
