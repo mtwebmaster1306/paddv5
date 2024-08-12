@@ -131,9 +131,9 @@ include 'componentes/sidebar.php';
             </td>
             <td>
                 <!-- Acciones -->
-                <a href="views/viewProveedor.php?id_proveedor=<?php echo $proveedor['id_proveedor']; ?>" data-toggle="tooltip" title="Ver Proveedor"><i class="fas fa-eye btn btn-primary micono"></i></a>  
+                <a class="btn btn-primary micono" href="views/viewProveedor.php?id_proveedor=<?php echo $proveedor['id_proveedor']; ?>" data-toggle="tooltip" title="Ver Proveedor"><i class="fas fa-eye "></i></a>  
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#actualizarProveedor" data-idproveedor="<?php echo $proveedor['id_proveedor']; ?>" onclick="loadProveedorData(this)"><i class="fas fa-pencil-alt"></i></button>
-                <a href="#" onclick="confirmarEliminacion(<?php echo htmlspecialchars($proveedor['id_proveedor']); ?>); return false;" data-toggle="tooltip" title="Eliminar Proveedor"><i class="fas fa-trash-alt btn btn-danger micono"></i></a>
+                <a class="btn btn-danger micono" href="#" onclick="confirmarEliminacion(<?php echo htmlspecialchars($proveedor['id_proveedor']); ?>); return false;" data-toggle="tooltip" title="Eliminar Proveedor"><i class="fas fa-trash-alt "></i></a>
             </td>
         </tr>
         <tr class="expandable-row" id="subtable-<?php echo $proveedor['id_proveedor']; ?>" style="display:none;">
@@ -209,7 +209,12 @@ include 'componentes/sidebar.php';
 
                                                         </td>
                                 <td><?php echo $soporte['telCelular']; ?></td>
-                                <td><button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> Ver</button></td>
+                                <td>
+                <!-- Acciones -->
+                <a class="btn btn-primary micono" href="views/viewSoporte.php?id_soporte=<?php echo $soporte['id_soporte']; ?>" data-toggle="tooltip" title="Ver Soporte"><i class="fas fa-eye "></i></a>  
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#actualizarProveedor" data-idproveedor="<?php echo $proveedor['id_proveedor']; ?>" onclick="loadProveedorData(this)"><i class="fas fa-pencil-alt"></i></button>
+                <a class="btn btn-danger micono" href="#" onclick="confirmarEliminacion(<?php echo htmlspecialchars($proveedor['id_proveedor']); ?>); return false;" data-toggle="tooltip" title="Eliminar Proveedor"><i class="fas fa-trash-alt "></i></a>
+            </td>
                             </tr>
                             <?php endif; ?>
                         <?php endforeach; ?>
@@ -373,12 +378,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="modal fade" id="actualizarProveedor" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
-              <div class="modal-header">
-      
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
+            
               <div class="modal-body">
                  <!-- Alerta para mostrar el resultado de la actualización -->
                  <div id="updateAlert" class="alert" style="display:none;" role="alert"></div>
@@ -392,11 +392,17 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="col-6">
                             <input type="hidden" name="id_proveedor">
                                 <p><input class="form-control" placeholder="Nombre Identificador" name="nombreIdentificador"></p>
-                                <select class="form-select mb-3" name="id_medios" id="id_medios">
-                    <?php foreach ($medios as $medio) : ?>
-                        <option value="<?php echo $medio['id']; ?>"><?php echo $medio['NombredelMedio']; ?></option>
-                    <?php endforeach; ?>
-                </select>
+                                <div class="mb-3 dropdown" id="dropdown3">
+    <button type="button" class="dropdown-button">Select Medios</button>
+    <div class="dropdown-content">
+        <?php foreach ($medios as $medio) : ?>
+            <label>
+                <input type="checkbox" name="id_medios[]" value="<?php echo $medio['id']; ?>">
+                <?php echo $medio['NombredelMedio']; ?>
+            </label>
+        <?php endforeach; ?>
+    </div>
+</div>
                                 <p><input class="form-control" placeholder="Nombre de Proveedor" name="nombreProveedor"></p>
                                 <p><input class="form-control" placeholder="Nombre de Fantasía" name="nombreFantasia"></p>
                                 
@@ -477,7 +483,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="col-6">
                   
                                 <p><input class="form-control" placeholder="Nombre Identificador" name="nombreIdentificador"></p>
-                                <div class="dropdown" id="dropdown1">
+                                <div class="mb-3 dropdown" id="dropdown1">
     <button type="button" class="dropdown-button">Select Medios</button>
     <div class="dropdown-content">
         <?php foreach ($medios as $medio) : ?>
@@ -565,7 +571,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                
                         </div>
                         <div class="col-6">
-                        <div class="dropdown" id="dropdown2">
+                        <div class="mb-3 dropdown" id="dropdown2">
                                         <button type="button" class="dropdown-button">Select Medios</button>
                                         <div class="dropdown-content">
                                             <?php foreach ($medios as $medio) : ?>
@@ -691,6 +697,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Inicializa los dropdowns
 setupDropdown('dropdown1');
 setupDropdown('dropdown2');
+setupDropdown('dropdown3');
 </script>
 
 <script>
