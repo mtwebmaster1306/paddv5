@@ -30,7 +30,6 @@ include 'componentes/sidebar.php';
                                             <th>ID</th>
                                             <th>Nombre Cliente</th>
                                             <th>Nombre de Producto</th>
-                                            <th>N° de Campañas</th>
                                             <th>N° de Contratos</th>
                                             <th>Acciones</th>
                                         </tr>
@@ -41,22 +40,7 @@ include 'componentes/sidebar.php';
                                             <td><?php echo $producto['id']; ?></td>
                                             <td><?php echo $clientesMap[$producto['Id_Cliente']]['nombreCliente'] ?? ''; ?></td>
                                             <td><?php echo $producto['NombreDelProducto']; ?></td>
-                                           <td>
-                                                <?php
-                                                // Verificar si existe la campaña en $campaignMap
-                                                if (isset($contadorcampaignsmaps[$producto['Id_Campañas']])) {
-                                                    // Obtener el nombre de la clasificación
-                                                    $nombreClasificacion = $contadorcampaignsmaps[$producto['Id_Campañas']]['id_campania'];
-                                
-
-                                                    // Obtener y mostrar el contador
-                                                    $contador = $contadorcampaignsmaps[$producto['Id_Campañas']]['count'] ?? 0;
-                                                    echo  $contador;
-                                                } else {
-                                                    echo '0'; // Mostrar cadena vacía si no se encuentra la campaña
-                                                }
-                                                ?>
-                                            </td>
+                                      
                                             <td>
                                                 <?php
                                                  
