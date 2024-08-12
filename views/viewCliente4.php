@@ -357,12 +357,9 @@ include '../componentes/sidebar.php';
                                                         data-bs-toggle="modal" data-bs-target="#actualizarcomisionModal"
                                                         data-idcomision="" data-toggle="tooltip" title="Editar"><i
                                                             class="fas fa-pencil-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-danger micono eliminar-comision"
-                                                        data-idcomision="<?php echo htmlspecialchars($comision['id_comision'] ?? ''); ?>"
-                                                        data-toggle="tooltip" title="Eliminar">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </button>
+                                                    <button type="button" class="btn btn-danger micono eliminar-comision" data-idcomision="<?php echo htmlspecialchars($comision['id_comision'] ?? ''); ?>" data-toggle="tooltip" title="Eliminar">
+    <i class="fas fa-trash-alt"></i>
+</button>
 
                                                 </td>
                                             </tr>
@@ -386,6 +383,7 @@ include '../componentes/sidebar.php';
                                     <table class="table table-bordered text-center">
                                         <thead>
                                             <tr>
+                                            <th>ID</th>
                                                 <th>Nombre Producto</th>
                                                 <th>N° Campañas</th>
                                                 <th>N° Contratos</th>
@@ -395,7 +393,8 @@ include '../componentes/sidebar.php';
                                         <tbody>
                                             <?php foreach ($productos as $producto): ?>
 
-                                            <tr>
+                                            <tr data-id-producto="<?php echo htmlspecialchars($producto['id']); ?>">
+                                            <td><?php echo htmlspecialchars($producto['id']); ?></td>
                                                 <td><?php echo htmlspecialchars($producto['NombreDelProducto']); ?></td>
                                                 <td>
                                                     <?php
@@ -431,12 +430,12 @@ include '../componentes/sidebar.php';
                                                 <td> <a href="" data-toggle="tooltip" title="Ver Producto"><i
                                                             class="fas fa-eye btn btn-primary micono"></i></a>
 
-                                                    <button type="button"
-                                                        class="btn btn-danger eliminar-producto micono"
-                                                        data-idproducto="<?php echo htmlspecialchars($producto['id']); ?>"
-                                                        data-toggle="tooltip">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </button>
+                                             <button type="button" class="btn btn-danger eliminar-producto" 
+        data-idproducto="<?php echo htmlspecialchars($producto['id']); ?>"
+        data-toggle="tooltip" title="Eliminar Producto2">
+    <i class="fas fa-trash-alt"></i>
+</button>
+
                                                 </td>
                                             </tr>
                                             <?php endforeach; ?>
@@ -650,8 +649,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let isSubmitting = false;
 
     // Asegúrate de reemplazar esto con tu clave API real de Supabase
-    const SUPABASE_API_KEY =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc';
+    const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc';
 
     form.addEventListener('submit', async function(event) {
         event.preventDefault();
@@ -679,17 +677,16 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             document.body.classList.add('loaded');
 
-            const response = await fetch(
-                'https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Comisiones', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'apikey': SUPABASE_API_KEY,
-                        'Authorization': `Bearer ${SUPABASE_API_KEY}`,
-                        'Prefer': 'return=minimal'
-                    },
-                    body: JSON.stringify(data)
-                });
+            const response = await fetch('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Comisiones', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPABASE_API_KEY,
+                    'Authorization': `Bearer ${SUPABASE_API_KEY}`,
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify(data)
+            });
 
             if (!response.ok) {
                 const errorText = await response.text();
@@ -728,16 +725,15 @@ document.addEventListener('DOMContentLoaded', function() {
     async function cargarComisiones() {
         const idCliente = <?php echo json_encode($idCliente); ?>;
         console.log('Cargando comisiones para el cliente:', idCliente);
-
+        
         try {
-            const response = await fetch(
-                `https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Comisiones?id_cliente=eq.${idCliente}&select=*`, {
-                    headers: {
-                        'apikey': SUPABASE_API_KEY,
-                        'Authorization': `Bearer ${SUPABASE_API_KEY}`
-                    }
-                });
-
+            const response = await fetch(`https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Comisiones?id_cliente=eq.${idCliente}&select=*`, {
+                headers: {
+                    'apikey': SUPABASE_API_KEY,
+                    'Authorization': `Bearer ${SUPABASE_API_KEY}`
+                }
+            });
+            
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

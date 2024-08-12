@@ -43,15 +43,57 @@ if (!$agencia) {
 ?>
 
 <div class="main-content">
+ <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?php echo $ruta; ?>dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo $ruta; ?>ListAgencia.php">Ver Agencias</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><?php echo $agencia['NombreDeFantasia']; ?></li>
+                      </ol>
+                    </nav>
     <section class="section">
-        <div class="card">
-            <div class="card-header milinea">
-                <div class="titulox"><h4>Detalle Agencia</h4></div>
-                <div class="agregar">
-                    <button type="button" class="btn btn-success micono" data-bs-toggle="modal" data-bs-target="#actualizaragencia2" data-idagencia="<?php echo $idAgencia ?>" onclick="loadAgenciaData2(this)">
-                        <i class="fas fa-pencil-alt"></i>
-                    </button>
+    <div class="section-body">
+   <div class="row mt-sm-4">
+
+    <div class="col-12 col-md-12 col-lg-4">
+                    <div class="card author-box">
+                        <div class="card-body">
+                            <div class="author-box-center">
+
+                                <div class="clearfix"></div>
+                                <div class="nombrex author-box-name">
+                                    <?php echo $agencia['NombreDeFantasia']; ?></div>
+                                <div class="author-box-job">
+                                             <?php
+    // Convertir la cadena de fecha y hora a un objeto DateTime
+    $fecha = new DateTime($agencia['created_at']);
+    
+    // Formatear la fecha como deseas (en este caso, solo la fecha)
+    echo 'Registrado el: '.$fecha->format('d-m-Y'); // Esto mostrará la fecha en formato AAAA-MM-DD
+    ?>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <div class="author-box-job">
+
+                                    Nombre Identificador: <?php echo $agencia['NombreIdentificador']; ?>
+                                </div>
+                                <div class="w-100 d-sm-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
+        
+
+
+
+
+<div class="col-12 col-md-12 col-lg-8">
+<div class="card">
+            <div class="card-header milinea">
+                
+               
             </div>
             <div class="card-body">
                 <!-- Pestañas -->
@@ -62,81 +104,91 @@ if (!$agencia) {
                     <li class="nav-item">
                         <a class="nav-link" id="facturacion-tab" data-toggle="tab" href="#facturacion" role="tab" aria-controls="facturacion" aria-selected="false">Datos de Facturación</a>
                     </li>
+                     <div class="agregar2">
+                    <button type="button" class="btn btn-success micono" data-bs-toggle="modal" data-bs-target="#actualizaragencia2" data-idagencia="<?php echo $idAgencia ?>" onclick="loadAgenciaData2(this)">
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
+                </div>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <!-- Datos Generales -->
                     <div class="tab-pane fade show active" id="generales" role="tabpanel" aria-labelledby="generales-tab">
                         <div class="row">
-                            <div class="yep col">
-                                <div class="concatn">
-                                    <label class="tituloviewagen">Razón Social:</label>
-                                    <span><?php echo $agencia['RazonSocial']; ?></span>
+                            
+                                <div class="col-md-4 col-6 b-r">
+                                <strong>Razón Social:</strong><br>
+                                   
+                                    <p class="text-muted""><?php echo $agencia['RazonSocial']; ?></p>
                                 </div>
-                                <div class="concatn">
-                                    <label class="tituloviewagen">Nombre de Fantasía:</label>
-                                    <span><?php echo $agencia['NombreDeFantasia']; ?></span>
+
+
+                                <div class="col-md-4 col-6 b-r">
+                                    <strong>Nombre de Fantasía:</strong><br>
+                                    <p><?php echo $agencia['NombreDeFantasia']; ?></p>
                                 </div>
-                                <div class="concatn">
-                                    <label class="tituloviewagen">Nombre Identificador:</label>
-                                    <span><?php echo $agencia['NombreIdentificador']; ?></span>
+                                <div class="col-md-4 col-6 b-r">
+                                    <strong>Nombre Identificador:</strong><br>
+                                    <p><?php echo $agencia['NombreIdentificador']; ?></p>
                                 </div>
-                                <div class="concatn">
-                                    <label class="tituloviewagen">Rut:</label>
-                                    <span><?php echo $agencia['RutAgencia']; ?></span>
+                                <div class="col-md-4 col-6 b-r">
+                                    <strong>Rut:</strong><br>
+                                    <p><?php echo $agencia['RutAgencia']; ?></p>
                                 </div>
-                            </div>
-                            <div class="yep col">
-                                <div class="concatn">
-                                    <label class="tituloviewagen">Giro:</label>
-                                    <span><?php echo $agencia['Giro']; ?></span>
+                            
+                           
+                                <div class="col-md-4 col-6 b-r">
+                                        <strong>Giro:</strong><br>
+                                    <p><?php echo $agencia['Giro']; ?></p>
                                 </div>
-                                <div class="concatn">
-                                    <label class="tituloviewagen">Nombre Representante Legal:</label>
-                                    <span><?php echo $agencia['NombreRepresentanteLegal']; ?></span>
+                                <div class="col-md-4 col-6 b-r">
+                                    <strong>Nombre Representante Legal:</strong><br>
+                                    <p><?php echo $agencia['NombreRepresentanteLegal']; ?></p>
                                 </div>
-                                <div class="concatn">
-                                    <label class="tituloviewagen">Rut Representante:</label>
-                                    <span><?php echo $agencia['rutRepresentante']; ?></span>
+                               <div class="col-md-4 col-6 b-r">
+                                    <strong>Rut Representante:</strong><br>
+                                    <p><?php echo $agencia['rutRepresentante']; ?></p>
                                 </div>
-                            </div>
+                            
                         </div>
                     </div>
                     <!-- Datos de Facturación -->
                     <div class="tab-pane fade" id="facturacion" role="tabpanel" aria-labelledby="facturacion-tab">
                         <div class="row">
-                            <div class="yep col">
-                                <div class="concatn">
-                                    <label class="tituloviewagen">Dirección:</label>
-                                    <span><?php echo $agencia['DireccionAgencia']; ?></span>
+                            
+                                <div class="col-md-4 col-6 b-r">
+                                    <strong>Dirección:</strong><br>
+                                    <p><?php echo $agencia['DireccionAgencia']; ?></p>
                                 </div>
-                                <div class="concatn">
-                                    <label class="tituloviewagen">Teléfono Celular:</label>
-                                    <span><?php echo $agencia['telCelular']; ?></span>
+                                <div class="col-md-4 col-6 b-r">
+                                    <strong>Teléfono Celular:</strong><br>
+                                    <p><?php echo $agencia['telCelular']; ?></p>
                                 </div>
-                                <div class="concatn">
-                                    <label class="tituloviewagen">Teléfono Fijo:</label>
-                                    <span><?php echo $agencia['telFijo']; ?></span>
+                                <div class="col-md-4 col-6 b-r">
+                                    <strong>Teléfono Fijo:</strong><br>
+                                    <p><?php echo $agencia['telFijo']; ?></p>
                                 </div>
-                            </div>
-                            <div class="yep col">
-                                <div class="concatn">
-                                    <label class="tituloviewagen">Email:</label>
-                                    <span><?php echo $agencia['Email']; ?></span>
+                          
+                            
+                                <div class="col-md-4 col-6 b-r">
+                                    <strong>Email:</strong><br>
+                                    <p><?php echo $agencia['Email']; ?></p>
                                 </div>
-                                <div class="concatn">
-                                    <label class="tituloviewagen">Región:</label>
-                                    <span><?php echo $nombreRegion; ?></span>
+                                <div class="col-md-4 col-6 b-r">
+                                    <strong>Región:</strong><br>
+                                    <p><?php echo $nombreRegion; ?></p>
                                 </div>
-                                <div class="concatn">
-                                    <label class="tituloviewagen">Comuna:</label>
-                                    <span><?php echo $nombreComuna; ?></span>
+                                <div class="col-md-4 col-6 b-r">
+                                    <strong>Comuna:</strong><br>
+                                    <p><?php echo $nombreComuna; ?></p>
                                 </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
     </section>
 </div>
 

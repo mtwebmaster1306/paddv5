@@ -35,6 +35,7 @@ $current_file = basename($_SERVER['PHP_SELF']);
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/css/components.css">
   <!-- Custom style CSS -->
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/css/custom.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/bundles/datatables/datatables.min.css">
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">

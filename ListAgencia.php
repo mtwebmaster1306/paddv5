@@ -23,7 +23,7 @@ include 'componentes/sidebar.php';
                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped" id="table-1">
+                                <table class="table table-striped text-center" id="table-1">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -69,20 +69,19 @@ include 'componentes/sidebar.php';
                                                  echo $contador;
                                                 ?>
                                             </td>
-                                            <td>
-                                                <div class="alineado">
-                                                    <label class="custom-switch mt-2" data-toggle="tooltip" 
-                                                           title="<?php echo $agencia['estado'] == 1 ? 'Desactivar agencia' : 'Activar agencia'; ?>">
-                                                        <input type="checkbox" name="custom-switch-checkbox-<?php echo $agencia['id']; ?>"
-                                                               class="custom-switch-input estado-switch"
-                                                               data-id="<?php echo $agencia['id']; ?>"
-                                                               data-tipo="agencia"
-                                                               <?php echo $agencia['estado'] == 1 ? 'checked' : ''; ?>>
-                                                        <span class="custom-switch-indicator"></span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td><a href="views/viewAgencia.php?id=<?php echo $agencia['id']; ?>" data-toggle="tooltip" title="Ver Cliente"><i class="fas fa-eye btn btn-primary micono"></i></a>   <button type="button" class="btn btn-success micono" data-bs-toggle="modal" data-bs-target="#actualizaragencia" data-idagencia    ="<?php echo $agencia['id']; ?>" onclick="loadAgenciaData(this)">
+                                          <td>
+    <div class="alineado">
+       <label class="custom-switch sino" data-toggle="tooltip" 
+       title="<?php echo $agencia['estado'] ? 'Desactivar agencia' : 'Activar agencia'; ?>">
+    <input type="checkbox" 
+           class="custom-switch-input estado-switch"
+           data-id="<?php echo $agencia['id']; ?>"
+           <?php echo $agencia['estado'] ? 'checked' : ''; ?>>
+    <span class="custom-switch-indicator"></span>
+</label>
+    </div>
+</td>
+                                            <td><a href="views/viewAgencia.php?id=<?php echo $agencia['id']; ?>" data-toggle="tooltip" title="Ver Agencia"><i class="fas fa-eye btn btn-primary micono"></i></a>   <button type="button" class="btn btn-success micono" data-bs-toggle="modal" data-bs-target="#actualizaragencia" data-idagencia    ="<?php echo $agencia['id']; ?>" onclick="loadAgenciaData(this)">
                             <i class="fas fa-pencil-alt"></i>
                         </button> <a href="#" data-toggle="tooltip" title="Eliminar Agencia" onclick="eliminarAgencia(<?php echo $agencia['id']; ?>)"><i class="fas fa-trash-alt btn btn-danger micono"></i></a></td>
                                         </tr>
@@ -233,5 +232,6 @@ include 'componentes/sidebar.php';
 
 
 <script src="assets/js/eliminaragencia.js"></script>
+<script src="assets/js/toggleAgenciaEstado.js"></script>
 <?php include 'componentes/settings.php'; ?>
 <?php include 'componentes/footer.php'; ?>
