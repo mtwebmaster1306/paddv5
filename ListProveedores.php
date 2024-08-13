@@ -148,7 +148,9 @@ include 'componentes/sidebar.php';
                         data-ico="<?php echo $proveedor['id_comuna']; ?>"        
                         data-tco="<?php echo $proveedor['telCelular']; ?>" 
                         data-tfo="<?php echo $proveedor['telFijo']; ?>" 
-                        data-elo="<?php echo $proveedor['email']; ?>" data-id="<?php echo $proveedor['id_proveedor']; ?>"><i class="fas fa-plus-circle"></i>  Crear Soporte</button> </div>
+                        data-elo="<?php echo $proveedor['email']; ?>" data-id="<?php echo $proveedor['id_proveedor']; ?>"><i class="fas fa-plus-circle"></i>  Crear Soporte</button>
+                        <button type="button" class="btn bn-padd micono" data-bs-toggle="modal" data-bs-target="#creacrea"><i class="fas fa-plus-circle"></i>  Agregar Soporte</button>
+                    </div>
                        
                     </div>
                 <table class="table table-striped">
