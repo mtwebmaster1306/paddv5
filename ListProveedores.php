@@ -54,7 +54,7 @@ include 'componentes/sidebar.php';
                     <div class="card">
                     <div class="card-header milinea">
                             <div class="titulox"><h4>Listado de Proveedores</h4></div>
-                            <div class="agregar"><button type="button" class="btn btn-success micono" data-bs-toggle="modal" data-bs-target="#agregarProveedor"  ><i class="fas fa-plus-circle"></i>Agregar proveedor</button>
+                            <div class="agregar"><button type="button" class="btn bn-padd micono" data-bs-toggle="modal" data-bs-target="#agregarProveedor"  ><i class="fas fa-plus-circle"></i> Agregar proveedor</button>
                             </div>
                         </div>
                         <div class="card-body">
@@ -138,8 +138,7 @@ include 'componentes/sidebar.php';
         </tr>
         <tr class="expandable-row" id="subtable-<?php echo $proveedor['id_proveedor']; ?>" style="display:none;">
             <td colspan="8">
-                <!-- Subtabla --><div class="card-header milinea"><div class="titulox"><h4>Listado de Proveedores</h4></div><div class="agregar"><button type="button" class="btn btn-success micono" data-bs-toggle="modal" data-bs-target="#agregarSoportessss"  data-rso="<?php echo $proveedor['razonSocial']; ?>"
-                        data-nfo="<?php echo $proveedor['nombreFantasia']; ?>"              
+                <!-- Subtabla --><div class="card-header milinea"><div class="titulox"><h4>Listado de Soportes</h4></div><div class="agregar"><button type="button" class="btn bn-padd micono" data-bs-toggle="modal" data-bs-target="#agregarSoportessss"  data-rso="<?php echo $proveedor['razonSocial']; ?>" data-nfo="<?php echo $proveedor['nombreFantasia']; ?>"              
                         data-rpo="<?php echo $proveedor['rutProveedor']; ?>"
                         data-gpo="<?php echo $proveedor['giroProveedor']; ?>"
                         data-nro="<?php echo $proveedor['nombreRepresentante']; ?>"            
@@ -149,7 +148,9 @@ include 'componentes/sidebar.php';
                         data-ico="<?php echo $proveedor['id_comuna']; ?>"        
                         data-tco="<?php echo $proveedor['telCelular']; ?>" 
                         data-tfo="<?php echo $proveedor['telFijo']; ?>" 
-                        data-elo="<?php echo $proveedor['email']; ?>" data-id="<?php echo $proveedor['id_proveedor']; ?>"><i class="fas fa-plus-circle"></i> <?php echo $proveedor['id_proveedor']; ?> Agregar Soporte</button></div></div>
+                        data-elo="<?php echo $proveedor['email']; ?>" data-id="<?php echo $proveedor['id_proveedor']; ?>"><i class="fas fa-plus-circle"></i>  Crear Soporte</button> </div>
+                       
+                    </div>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -461,49 +462,90 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
 //fin editar modal
 //Agregar Proveedor
-
 <div class="modal fade" id="agregarProveedor" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                 <!-- Alerta para mostrar el resultado de la actualización -->
-                 <div id="updateAlert" class="alert" style="display:none;" role="alert"></div>
-                            
-                 
-                 <form id="formularioAgregarProveedor">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <!-- Alerta para mostrar el resultado de la actualización -->
+                <div id="updateAlert" class="alert" style="display:none;" role="alert"></div>
+
+                <form id="formularioAgregarProveedor">
                     <!-- Campos del formulario -->
                     <div>
                         <h3 class="titulo-registro mb-3">Agregar Proveedor</h3>
                         <div class="row">
                             <div class="col-6">
-                  
-                                <p><input class="form-control" placeholder="Nombre Identificador" name="nombreIdentificador"></p>
-                                <div class="mb-3 dropdown" id="dropdown1">
-    <button type="button" class="dropdown-button">Select Medios</button>
-    <div class="dropdown-content">
-        <?php foreach ($medios as $medio) : ?>
-            <label>
-                <input type="checkbox" name="id_medios[]" value="<?php echo $medio['id']; ?>">
-                <?php echo $medio['NombredelMedio']; ?>
-            </label>
-        <?php endforeach; ?>
-    </div>
-</div>
-                                <p><input class="form-control" placeholder="Nombre de Proveedor" name="nombreProveedor"></p>
-                                <p><input class="form-control" placeholder="Nombre de Fantasía" name="nombreFantasia"></p>
-                                
-                                
+                                <div class="form-group">
+                                    <label for="codigo">Nombre Identificador</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-user-circle"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Nombre Identificador" name="nombreIdentificador">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Medios</label>
+                                    <div class="input-group dropdown" id="dropdown1">
+                                        <div class="sell input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                        </div>
+                                        <div class="selected-options" onclick="toggleDropdown()"></div>
+                                        <button type="button" class="dropdown-button" style="display:none;">Select Medios</button>
+                                        <div class="dropdown-content">
+                                            <?php foreach ($medios as $medio) : ?>
+                                                <label>
+                                                    <input type="checkbox" name="id_medios[]" value="<?php echo $medio['id']; ?>">
+                                                    <?php echo $medio['NombredelMedio']; ?>
+                                                </label>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                    <label class="labelforms" for="codigo">Nombre de Proveedor</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-user"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Nombre de Proveedor" name="nombreProveedor">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Nombre Representante</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-user"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Nombre Representante" name="nombreRepresentante">
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-6">
-                                <p><input class="form-control" placeholder="Rut Proveedor" name="rutProveedor"></p>
-                                <p><input class="form-control" placeholder="Giro Proveedor" name="giroProveedor"></p>
-                                <p><input class="form-control" placeholder="Nombre Representante" name="nombreRepresentante"></p>
-                                <p><input class="form-control" placeholder="Rut Representante" name="rutRepresentante"></p>
+                                <div class="form-group">
+                                    <label for="codigo">Rut Proveedor</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-address-card"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Rut Proveedor" name="rutProveedor">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Giro Proveedor</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-suitcase"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Giro Proveedor" name="giroProveedor">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Nombre de Fantasía</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-hand-spock"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Nombre de Fantasía" name="nombreFantasia">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Rut Representante</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-address-card"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Rut Representante" name="rutRepresentante">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -511,52 +553,118 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h3 class="titulo-registro mb-3">Datos de facturación</h3>
                         <div class="row">
                             <div class="col-6">
-                            <p><input class="form-control" placeholder="Razón Social" name="razonSocial"></p>
-                                <p><input class="form-control" placeholder="Dirección Facturación" name="direccionFacturacion"></p>
-                                <select class="form-select mb-3" name="id_region" id="region" required>
-    <?php foreach ($regiones as $regione) : ?>
-        <option value="<?php echo $regione['id']; ?>"><?php echo $regione['nombreRegion']; ?></option>
-    <?php endforeach; ?>
-</select>
-<select class="form-select mb-3" name="id_comuna" id="comuna" required>
-    <?php foreach ($comunas as $comuna) : ?>
-        <option value="<?php echo $comuna['id_comuna']; ?>" data-region="<?php echo $comuna['id_region']; ?>">
-            <?php echo $comuna['nombreComuna']; ?>
-        </option>
-    <?php endforeach; ?>
-</select>
-                                
+                                <div class="form-group">
+                                    <label for="codigo">Razón Social</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-bullseye"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Razón Social" name="razonSocial">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Región</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-location-arrow"></i></span>
+                                        </div>
+                                        <select class="sesel form-select" name="id_region" id="region" required>
+                                            <?php foreach ($regiones as $regione) : ?>
+                                                <option value="<?php echo $regione['id']; ?>"><?php echo $regione['nombreRegion']; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <label class="labelforms" for="codigo">Teléfono celular</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Teléfono celular" name="telCelular">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Email</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Email" name="email">
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-6">
-                            <p><input class="form-control" placeholder="Teléfono celular" name="telCelular"></p>
-                                <p><input class="form-control" placeholder="Teléfono fijo" name="telFijo"></p>
-                                <p><input class="form-control" placeholder="Email" name="email"></p>
+                                <div class="form-group">
+                                    <label for="codigo">Dirección Facturación</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-building"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Dirección Facturación" name="direccionFacturacion">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Comuna</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-location-arrow"></i></span>
+                                        </div>
+                                        <select class="sesel form-select" name="id_comuna" id="comuna" required>
+                                            <?php foreach ($comunas as $comuna) : ?>
+                                                <option value="<?php echo $comuna['id_comuna']; ?>" data-region="<?php echo $comuna['id_region']; ?>">
+                                                    <?php echo $comuna['nombreComuna']; ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <label class="labelforms" for="codigo">Teléfono fijo</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Teléfono fijo" name="telFijo">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <h3 class="titulo-registro mb-3">Otros datos</h3>
                         <div class="row">
-    <div class="col">
-    <p><input class="form-control" placeholder="Bonifiación por año %" name="bonificacion_ano"></p>
-    </div>
-    <div class="col" id="moneda-container">
-    <p><input class="form-control" placeholder="Escala de rango" name="escala_rango"></p>
-    </div>
-
-</div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="codigo">Bonifiación por año %</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Bonifiación por año %" name="bonificacion_ano">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col" id="moneda-container">
+                                <div class="form-group">
+                                    <label for="codigo">Escala de rango</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-chart-bar"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Escala de rango" name="escala_rango">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="provprov" >Guardar cambios</button>
+                    <div class="d-flex justify-content-end mt-3">
+                        <button class="btn btn-primary btn-lg rounded-pill" type="button" id="actualizarProveedor">
+                            <span class="btn-txt">Guardar Proveedor</span>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display:none;"></span>
+                        </button>
+                    </div>
                 </form>
-              </div>
             </div>
-          </div>
         </div>
+    </div>
+</div>
+
 //fin editar modal
 
 
 //MODAL AGREGAR SOPORTESS
 
 <div class="modal fade" id="agregarSoportessss" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
      
             <div class="modal-body">
@@ -567,62 +675,160 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h3 class="titulo-registro mb-3">Agregar Soporte</h3>
                     <div class="row">
                         <div class="col-6">
-                                <p><input class="form-control" placeholder="Nombre Identificador" name="nombreIdentficiador" required></p> 
+                        <div class="form-group">
+                                    <label for="codigo">Nombre Identificador</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-user-circle"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Nombre Identificador" name="nombreIdentficiador" required>
+                                    </div>
+                        </div>
+                              
                                
                         </div>
                         <div class="col-6">
-                        <div class="mb-3 dropdown" id="dropdown2">
-                                        <button type="button" class="dropdown-button">Select Medios</button>
-                                        <div class="dropdown-content">
-                                            <?php foreach ($medios as $medio) : ?>
-                                                <label>
-                                                    <input type="checkbox" name="id_medios[]" value="<?php echo $medio['id']; ?>">
-                                                    <?php echo $medio['NombredelMedio']; ?>
-                                                </label>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </div>
-                        </div>
-              
+                        <div class="form-group">
+                          <label  for="codigo">Medios</label>
+<div class="input-group dropdown" id="dropdown2">
+    <div class="sell input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+    </div>
+    <div class="selected-options" onclick="toggleDropdown()"></div>
+    <button type="button" class="dropdown-button" style="display:none;">Select Medios</button>
+    <div class="dropdown-content">
+        <?php foreach ($medios as $medio) : ?>
+            <label>
+                <input type="checkbox" name="id_medios[]" value="<?php echo $medio['id']; ?>">
+                <?php echo $medio['NombredelMedio']; ?>
+            </label>
+        <?php endforeach; ?>
+    </div>
+</div>
+</div>
                     </div>
                     <div class="row"><label class="opeo"><input type="checkbox" name="revision"> <span>Usar los mismos datos del proveedor</span></label></div>
                    <div class="checklust">
                    <div class="row ">
                         <div class="col-6">
-                            <p><input class="form-control" placeholder="Razón Social" name="razonSocial"></p>
-                            <p><input class="form-control" placeholder="Rut" name="rut_soporte" required></p>   
-                            <p><input class="form-control" placeholder="Nombre Representante Legal" name="nombreRepresentanteLegal" required></p>  
+                        <div class="form-group">
+                        <label  for="codigo">Razón Social</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-bullseye"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Razón Social" name="razonSocial">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Rut</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-address-card"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Rut" name="rut_soporte" required>
+                                    </div>
+                                    <label class="labelforms" for="codigo">Nombre Representante Legal</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-user"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Nombre Representante Legal" name="nombreRepresentanteLegal" required>
+                                    </div>  
+                        </div>
                         </div>
                         <div class="col-6">
-                            <p><input class="form-control" placeholder="Nombre de Fantasía" name="nombreFantasia" required></p>
-                            <p><input class="form-control" placeholder="Giro" name="giro" required></p>
-                            <p><input class="form-control" placeholder="Rut Representante" name="rutRepresentante" required></p>
-                        </div>
+                        <div class="form-group">
+                        <label  for="codigo">Nombre de Fantasía</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-hand-spock"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Nombre de Fantasía" name="nombreFantasia" required>
+                                    </div>
+                                    <label class="labelforms"  for="codigo">Giro</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-suitcase"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Giro" name="giro" required>
+                                    </div>
+                                    <label class="labelforms" for="codigo">Rut Representante</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-address-card"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Rut Representante" name="rutRepresentante" required>
+                                    </div>
+                                </div></div>
                     </div>
                     <div>
                         <h3 class="titulo-registro mb-3">Datos de facturación</h3>
                         <div class="row">
                         <div class="col-6">
-                                <p><input class="form-control" placeholder="Dirección Facturación" name="direccion"></p>
-                                <select class="foulou form-select mb-3" name="id_region" id="region" required>
+
+                        <div class="form-group">
+                        <label  for="codigo">Dirección Facturación</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-building"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Dirección Facturación" name="direccion">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Región</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-location-arrow"></i></span>
+                                        </div>
+                                        <select class="sesel form-select" name="id_region" id="region" required>
                                     <?php foreach ($regiones as $regione) : ?>
                                         <option value="<?php echo $regione['id']; ?>"><?php echo $regione['nombreRegion']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                    <p><input class="form-control" placeholder="Teléfono celular" name="telCelular" required></p>
-                                
                                     </div>
+                                    <label class="labelforms" for="codigo">Teléfono celular</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Teléfono celular" name="telCelular" required>
+                                    </div>
+                                    </div></div>
                         <div class="col-6">
-                            <p><input class="form-control" placeholder="Email" name="email"></p>
-                            <select class="foulou form-select mb-3" name="id_comuna" id="comuna" required>
+
+                        <div class="form-group">
+                        <label  for="codigo">Email</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Email" name="email">
+                                    </div>   
+                                    <label class="labelforms" for="codigo">Comuna</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-location-arrow"></i></span>
+                                        </div>
+                                        <select class="sesel form-select" name="id_comuna" id="comuna" required>
                                 <?php foreach ($comunas as $comuna) : ?>
                                     <option value="<?php echo $comuna['id_comuna']; ?>" data-region="<?php echo $comuna['id_region']; ?>">
                                         <?php echo $comuna['nombreComuna']; ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
-                            <p><input class="form-control" placeholder="Teléfono fijo" name="telFijo" required></p>    
-                        </div>
+                                    </div> 
+                                    <label class="labelforms"  for="codigo">Teléfono fijo</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Teléfono fijo" name="telFijo" required>
+                                    </div>   
+
+
+
+                            
+                           
+                                
+                        </div></div>
                     </div>
                    </div>
                     
@@ -647,10 +853,26 @@ document.addEventListener('DOMContentLoaded', function() {
                         <input name="emailO" type="hidden">
                         <div class="row">
                             <div class="col">
-                                <p><input class="form-control" placeholder="Bonificación por año %" name="bonificacion_ano" required></p>
+                            <div class="form-group">
+                        <label  for="codigo">Bonificación por año %</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-bullseye"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Bonificación por año %" name="bonificacion_ano" required>
+                                    </div>  </div>
+                        
                             </div>
                             <div class="col" id="moneda-container">
-                                <p><input class="form-control" placeholder="Escala de rango" name="escala_rango" required></p>
+                            <div class="form-group">
+                        <label  for="codigo">Escala de rango</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-bullseye"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Escala de rango" name="escala_rango" required>
+                                    </div>  </div>
+                               
                             </div>
                         </div>
                     </div> 
@@ -671,27 +893,84 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="<?php echo $ruta; ?>assets/js/agregarproveedor.js"></script>
 
 <script>
-   function setupDropdown(dropdownId) {
+function setupDropdown(dropdownId) {
     const dropdown = document.querySelector(`#${dropdownId}`);
     const dropdownButton = dropdown.querySelector('.dropdown-button');
     const dropdownContent = dropdown.querySelector('.dropdown-content');
+    const selectedOptionsContainer = dropdown.querySelector('.selected-options');
+    const sellElement = dropdown.querySelector('.sell'); // Selecciona el elemento con la clase 'sell'
 
-    dropdownButton.addEventListener('click', function(event) {
-        event.stopPropagation();
+    // Manejador de evento para mostrar/ocultar el contenido del dropdown
+    function toggleDropdown() {
         dropdown.classList.toggle('open');
+        dropdownContent.style.display = dropdown.classList.contains('open') ? 'grid' : 'none';
+    }
+
+    // Mostrar el dropdown al hacer clic en el contenedor de opciones seleccionadas
+    selectedOptionsContainer.addEventListener('click', function(event) {
+        event.stopPropagation();
+        toggleDropdown();
     });
 
+    // Mostrar el dropdown al hacer clic en el botón
+    dropdownButton.addEventListener('click', function(event) {
+        event.stopPropagation();
+        toggleDropdown();
+    });
+
+    // Cerrar el dropdown al hacer clic fuera de él
     window.addEventListener('click', function(event) {
         if (!dropdown.contains(event.target)) {
             dropdown.classList.remove('open');
+            dropdownContent.style.display = 'none';
         }
     });
 
+    // Manejador para actualizar las opciones seleccionadas
     dropdown.querySelectorAll('.dropdown-content input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('click', function(event) {
+        checkbox.addEventListener('change', function(event) {
             event.stopPropagation();
+            updateSelectedOptions();
         });
     });
+
+    // Función para actualizar el contenedor de opciones seleccionadas
+    function updateSelectedOptions() {
+        selectedOptionsContainer.innerHTML = ''; // Limpia las opciones seleccionadas
+
+        const selectedCheckboxes = dropdown.querySelectorAll('.dropdown-content input[type="checkbox"]:checked');
+        if (selectedCheckboxes.length > 0) {
+            dropdownButton.style.display = 'none';
+            sellElement.style.display = 'none';
+            selectedOptionsContainer.style.display = 'flex'; // Mostrar el contenedor si hay opciones seleccionadas
+        } else {
+            dropdownButton.style.display = 'block';
+            sellElement.style.display = 'block';
+            selectedOptionsContainer.style.display = 'none'; // Ocultar el contenedor si no hay opciones seleccionadas
+        }
+
+        selectedCheckboxes.forEach(checkbox => {
+            const label = checkbox.parentElement.textContent.trim();
+            const selectedOption = document.createElement('span');
+            selectedOption.className = 'selected-option';
+            selectedOption.textContent = label;
+            selectedOption.dataset.value = checkbox.value;
+
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'x';
+            removeButton.addEventListener('click', function(event) {
+                event.stopPropagation();
+                checkbox.checked = false;
+                updateSelectedOptions();
+            });
+
+            selectedOption.appendChild(removeButton);
+            selectedOptionsContainer.appendChild(selectedOption);
+        });
+    }
+
+    // Actualizar la vista de las opciones seleccionadas en la inicialización
+    updateSelectedOptions();
 }
 
 // Inicializa los dropdowns
