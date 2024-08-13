@@ -54,7 +54,7 @@ include 'componentes/sidebar.php';
                     <div class="card">
                     <div class="card-header milinea">
                             <div class="titulox"><h4>Listado de Proveedores</h4></div>
-                            <div class="agregar"><button type="button" class="btn bn-padd micono" data-bs-toggle="modal" data-bs-target="#agregarProveedor"  ><i class="fas fa-plus-circle"></i> Agregar proveedor</button>
+                            <div class="agregar"><button type="button" class="btn btn-primary micono" data-bs-toggle="modal" data-bs-target="#agregarProveedor"  ><i class="fas fa-plus-circle"></i> Agregar proveedor</button>
                             </div>
                         </div>
                         <div class="card-body">
@@ -138,7 +138,7 @@ include 'componentes/sidebar.php';
         </tr>
         <tr class="expandable-row" id="subtable-<?php echo $proveedor['id_proveedor']; ?>" style="display:none;">
             <td colspan="8">
-                <!-- Subtabla --><div class="card-header milinea"><div class="titulox"><h4>Listado de Soportes</h4></div><div class="agregar"><button type="button" class="btn bn-padd micono" data-bs-toggle="modal" data-bs-target="#agregarSoportessss"  data-rso="<?php echo $proveedor['razonSocial']; ?>" data-nfo="<?php echo $proveedor['nombreFantasia']; ?>"              
+                <!-- Subtabla --><div class="card-header milinea"><div class="titulox"><h4>Listado de Soportes</h4></div><div class="agregar"><button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#agregarSoportessss"  data-rso="<?php echo $proveedor['razonSocial']; ?>" data-nfo="<?php echo $proveedor['nombreFantasia']; ?>"              
                         data-rpo="<?php echo $proveedor['rutProveedor']; ?>"
                         data-gpo="<?php echo $proveedor['giroProveedor']; ?>"
                         data-nro="<?php echo $proveedor['nombreRepresentante']; ?>"            
@@ -150,7 +150,7 @@ include 'componentes/sidebar.php';
                         data-tfo="<?php echo $proveedor['telFijo']; ?>" 
                         data-elo="<?php echo $proveedor['email']; ?>" data-id="<?php echo $proveedor['id_proveedor']; ?>"><i class="fas fa-plus-circle"></i>  Crear Soporte</button>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarsoporteprov" data-id-proveedor="<?php echo $id_proveedor; ?>">
-    <i class="fas fa-plus-circle"></i> <?php echo $id_proveedor; ?>  Agregar Soporte
+    <i class="fas fa-plus-circle"></i> Agregar Soporte
 </button>                    </div>
                        
                     </div>
@@ -799,7 +799,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <input class="form-control" placeholder="Nombre Identificador" name="nombreIdentificador">
                                     </div>
                                     <label class="labelforms" for="codigo">Medios</label>
-                                    <div class="input-group dropdown" id="dropdown1">
+                                    <div class="input-group dropdown" id="dropdown3">
                                         <div class="sell input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                                         </div>
@@ -962,7 +962,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                     <div class="d-flex justify-content-end mt-3">
-                        <button class="btn btn-primary btn-lg rounded-pill" type="button" id="actualizarProveedor">
+                        <button class="btn btn-primary btn-lg rounded-pill" type="submit" id="actualizarProveedor">
                             <span class="btn-txt">Guardar Proveedor</span>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display:none;"></span>
                         </button>
@@ -984,7 +984,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div id="updateAlert" class="alert" style="display:none;" role="alert"></div>
                 
                 <!-- Campo para mostrar el id_proveedor -->
-                <input class="form-control" placeholder="Prueba de id " name="pruebaid" id="pruebaid">
+                <input type="hidden" class="form-control" placeholder="Prueba de id " name="pruebaid" id="pruebaid">
                 
                 <form id="formagregarsoporte">
                     <div class="form-group">
@@ -1000,8 +1000,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 <script>
-    // Script para manejar el modal y cargar los soportes
-    document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     $('#agregarsoporteprov').on('shown.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var idProveedor = button.data('id-proveedor');
@@ -1014,55 +1013,48 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch(`https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/proveedor_soporte?select=id_soporte&id_proveedor=eq.${idProveedor}`, {
             headers: {
                 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc',
-                  }
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc',
+            }
         })
         .then(response => response.json())
         .then(proveedor_soportes => {
-            if (!proveedor_soportes || proveedor_soportes.length === 0) {
-                console.error("No se encontraron soportes vinculados.");
-                var vinculados_str = '';
+            let vinculados_str = '';
+            if (proveedor_soportes && proveedor_soportes.length > 0) {
+                const vinculados = proveedor_soportes.map(soporte => soporte.id_soporte);
+                vinculados_str = vinculados.filter(id => id).join(','); // Filtrar valores vacíos
+            } 
+
+            // Realizar la petición para obtener soportes no vinculados o todos los soportes si no hay vinculados
+            const url = vinculados_str 
+                ? `https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Soportes?id_soporte=not.in.(${vinculados_str})&select=*`
+                : `https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Soportes?select=*`;
+
+            return fetch(url, {
+                headers: {
+                    'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc',
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc',
+                }
+            })
+        })
+        .then(response => response.json())
+        .then(soportes_no_vinculados => {
+            console.log(soportes_no_vinculados);
+
+            var soporteSelect = document.getElementById('soporteSelect');
+            soporteSelect.innerHTML = '';
+
+            if (soportes_no_vinculados && soportes_no_vinculados.length > 0) {
+                soportes_no_vinculados.forEach(function (soporte) {
+                    var option = document.createElement('option');
+                    option.value = soporte.id_soporte;
+                    option.textContent = soporte.nombreIdentficiador;
+                    soporteSelect.appendChild(option);
+                });
             } else {
-                var vinculados = proveedor_soportes.map(soporte => soporte.id_soporte);
-                var vinculados_str = vinculados.filter(id => id).join(','); // Filtrar valores vacíos
-            }
-
-            // Solo hacer la petición si vinculados_str no está vacío
-            if (vinculados_str) {
-                // Realizar la petición para obtener los soportes que no están vinculados a este proveedor
-                fetch(`https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Soportes?id_soporte=not.in.(${vinculados_str})&select=*`, {
-                    headers: {
-                        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc',
-                    }
-                })
-                .then(response => response.json())
-                .then(soportes_no_vinculados => {
-                    console.log(soportes_no_vinculados);
-
-                    var soporteSelect = document.getElementById('soporteSelect');
-                    console.log(soporteSelect);
-
-                    soporteSelect.innerHTML = '';
-
-                    if (soportes_no_vinculados && soportes_no_vinculados.length > 0) {
-                        soportes_no_vinculados.forEach(function (soporte) {
-                            console.log(soporte);
-                            var option = document.createElement('option');
-                            option.value = soporte.id_soporte;
-                            option.textContent = soporte.nombreIdentficiador;
-                            soporteSelect.appendChild(option);
-                        });
-                    } else {
-                        console.warn("No se encontraron soportes no vinculados.");
-                    }
-                })
-                .catch(error => console.error("Error al obtener soportes no vinculados:", error));
-            } else {
-                console.warn("No hay soportes vinculados. No se realizará la segunda solicitud.");
+                console.warn("No se encontraron soportes no vinculados.");
             }
         })
-        .catch(error => console.error("Error al obtener soportes vinculados:", error));
+        .catch(error => console.error("Error al obtener soportes:", error));
     });
     document.getElementById('formagregarsoporte').addEventListener('submit', function (event) {
     event.preventDefault();
@@ -1145,7 +1137,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="col-6">
                         <div class="form-group">
                           <label  for="codigo">Medios</label>
-<div class="input-group dropdown" id="dropdown2">
+<div class="input-group dropdown" id="dropdown4">
     <div class="sell input-group-prepend">
         <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
     </div>
@@ -1436,6 +1428,7 @@ function setupDropdown(dropdownId) {
 setupDropdown('dropdown1');
 setupDropdown('dropdown2');
 setupDropdown('dropdown3');
+setupDropdown('dropdown4');
 </script>
 
 <script>
