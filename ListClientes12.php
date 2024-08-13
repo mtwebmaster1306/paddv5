@@ -69,7 +69,7 @@ include 'componentes/sidebar.php';
                                             <td>
                                                 <a href="views/viewCliente.php?id_cliente=<?php echo $cliente['id_cliente']; ?>" data-toggle="tooltip" title="Ver Cliente"><i class="fas fa-eye btn btn-primary micono"></i></a>
                                                 <button type="button" class="btn btn-success micono" data-bs-toggle="modal" data-bs-target="#actualizarcliente" data-idcliente="<?php echo $cliente['id_cliente']; ?>" onclick="loadClienteData(this)" ><i class="fas fa-pencil-alt"></i></button>
-                                                <a href="#" data-toggle="tooltip" title="Eliminar Cliente"><i class="fas fa-trash-alt btn btn-danger micono"></i></a>
+                                                <a href="#" class="btn btn-danger micono delete-client" data-id="<?php echo $cliente['id_cliente']; ?>" data-toggle="tooltip" title="Eliminar Cliente"><i class="fas fa-trash-alt"></i></a>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
@@ -247,4 +247,5 @@ include 'componentes/sidebar.php';
 
 <?php include 'componentes/settings.php'; ?>
 <script src="assets/js/toggleClientes.js"></script>
+<script src="assets/js/deleteCliente.js"></script>
 <?php include 'componentes/footer.php'; ?>
