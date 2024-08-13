@@ -19,6 +19,7 @@ $ruta = 'http://localhost:3000/';
 
 
 
+
 $current_file = basename($_SERVER['PHP_SELF']);
 
 ?>
