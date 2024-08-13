@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     
     error_log("Intentando eliminar medio con ID: $id");
 
-    $url = SUPABASE_URL . "/rest/v1/Soporte?id_soporte=eq." . urlencode($id);
+    $url = SUPABASE_URL . "/rest/v1/Soportes?id_soporte=eq." . urlencode($id);
     error_log("URL de eliminación: $url");
 
     $resultado = makeRequest($url, 'DELETE');

@@ -1,3 +1,34 @@
+function loadProveedorData(button) {
+    var idProveedor = button.getAttribute('data-idproveedor');
+    var proveedor = getProveedorData(idProveedor);
+
+    if (proveedor) {
+        console.log('Datos del proveedor:', proveedor);
+        document.querySelector('input[name="idprooo"]').value = proveedor.id_proveedor;
+        document.querySelector('input[name="nombreIdentificadorp"]').value = proveedor.nombreIdentificador;
+        document.querySelector('input[name="nombreProveedorp"]').value = proveedor.nombreProveedor;
+        document.querySelector('input[name="nombreFantasiap"]').value = proveedor.nombreFantasia;
+        document.querySelector('input[name="rutProveedorp"]').value = proveedor.rutProveedor;
+        document.querySelector('input[name="giroProveedorp"]').value = proveedor.giroProveedor;
+        document.querySelector('input[name="nombreRepresentantep"]').value = proveedor.nombreRepresentante;
+        document.querySelector('input[name="rutRepresentantep"]').value = proveedor.rutRepresentante;
+        document.querySelector('input[name="razonSocialp"]').value = proveedor.razonSocial;
+        document.querySelector('input[name="direccionFacturacionp"]').value = proveedor.direccionFacturacion;
+        document.querySelector('select[name="id_regionp"]').value = proveedor.id_region;
+        document.querySelector('select[name="id_comunap"]').value = proveedor.id_comuna;
+        document.querySelector('input[name="telCelularp"]').value = proveedor.telCelular;
+        document.querySelector('input[name="telFijop"]').value = proveedor.telFijo;
+        document.querySelector('input[name="emailp"]').value = proveedor.email;
+        document.querySelector('input[name="bonificacion_anop"]').value = proveedor.bonificacion_ano;
+        document.querySelector('input[name="escala_rangop"]').value = proveedor.escala_rango;
+
+       
+    } else {
+        console.log("No se encontró el proveedor con ID:", idProveedor);
+    }
+}
+
+
 function getFormData3() {
     const formData = new FormData(document.getElementById('formactualizarproveedor'));
 
@@ -10,24 +41,23 @@ function getFormData3() {
     console.log(dataObject, "aqui el actualizar señores"); // Imprime el objeto con los datos del formulario
 
     return {
-        nombreIdentificador: dataObject.nombreIdentificador,
-        nombreProveedor: dataObject.nombreProveedor,
-        nombreFantasia: dataObject.nombreFantasia,
-        rutProveedor: dataObject.rutProveedor,
-        giroProveedor: dataObject.giroProveedor,
-        nombreRepresentante: dataObject.nombreRepresentante,
-        rutRepresentante: dataObject.rutRepresentante,
-        razonSocial: dataObject.razonSocial,
-        direccionFacturacion: dataObject.direccionFacturacion,
-        id_medios: dataObject.id_medios,
-        id_region: dataObject.id_region,
-        id_comuna: dataObject.id_comuna,
-        telCelular: dataObject.telCelular,
-        telFijo: dataObject.telFijo,
-        email: dataObject.email || null,
-        bonificacion_ano: dataObject.bonificacion_ano,
-        escala_rango: dataObject.escala_rango,
-        estado: true
+        nombreIdentificador: dataObject.nombreIdentificadorp,
+        nombreProveedor: dataObject.nombreProveedorp,
+        nombreFantasia: dataObject.nombreFantasiap,
+        rutProveedor: dataObject.rutProveedorp,
+        giroProveedor: dataObject.giroProveedorp,
+        nombreRepresentante: dataObject.nombreRepresentantep,
+        rutRepresentante: dataObject.rutRepresentantep,
+        razonSocial: dataObject.razonSocialp,
+        direccionFacturacion: dataObject.direccionFacturacionp,
+        id_medios: dataObject.id_mediosp,
+        id_region: dataObject.id_regionp,
+        id_comuna: dataObject.id_comunap,
+        telCelular: dataObject.telCelularp,
+        telFijo: dataObject.telFijop,
+        email: dataObject.emailp || null,
+        bonificacion_ano: dataObject.bonificacion_anop,
+        escala_rango: dataObject.escala_rangop,
     };
 }
 
@@ -38,7 +68,7 @@ async function submitForm3(event) {
     let bodyContent = JSON.stringify(getFormData3());
     console.log(bodyContent, "holacon");
 
-    let idProveedor = document.querySelector('input[name="id_proveedor"]').value;
+    let idProveedor = document.querySelector('input[name="idprooo"]').value;
 
     let headersList = {
         "Content-Type": "application/json",
