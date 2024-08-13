@@ -159,8 +159,7 @@ async function submitFormSoporte(event) {
             alert("Error al registrar el soporte, intente nuevamente");
         }
     } catch (error) {
-        console.error("Error en la solicitud:", error);
-        alert("Error en la solicitud, intente nuevamente");
+        location.reload();
     }
 }
 
