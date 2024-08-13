@@ -17,7 +17,7 @@ include 'componentes/sidebar.php';
                         <div class="card-header">
                         <div class="card-header milinea">
                         <div class="titulox"><h4>Listado Agencias</h4></div>
-                        <div class="agregar"><a class="btn btn-primary" href="addAgencia.php"><i class="fas fa-plus-circle"></i> Agregar Cliente</a></div>
+                        <div class="agregar"><a class="btn btn-primary" href="addAgencia.php"><i class="fas fa-plus-circle"></i> Agregar Agencia</a></div>
                         </div>
                             
                        </div>

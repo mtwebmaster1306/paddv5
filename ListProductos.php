@@ -7,6 +7,7 @@ include 'componentes/header.php';
 include 'componentes/sidebar.php';
 ?>
 <div class="main-content">
+
   <section class="section">
     <div class="section-body">
       <div class="row">
@@ -20,6 +21,64 @@ include 'componentes/sidebar.php';
                 <button type="button" class="btn btn-primary btn-narango" data-bs-toggle="modal"
                   data-bs-target="#modalagregar"><i class="fas fa-plus-circle"></i> Agregar Productos</button>
               </div>
+
+
+    <section class="section">
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                    <div class="card-header milinea">
+                            <div class="titulox">
+                                <h4>Listado de Productos</h4>
+                            </div>
+                            <div class="agregar">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#modalagregar"><i class="fas fa-plus-circle"></i> Agregar Productos</button>
+                            </div>
+                            
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="table-1">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nombre Cliente</th>
+                                            <th>Nombre de Producto</th>
+                                            <th>N° de Contratos</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($productos as $producto): ?>
+                                        <tr>
+                                            <td><?php echo $producto['id']; ?></td>
+                                            <td><?php echo $clientesMap[$producto['Id_Cliente']]['nombreCliente'] ?? ''; ?></td>
+                                            <td><?php echo $producto['NombreDelProducto']; ?></td>
+                                      
+                                            <td>
+                                                <?php
+                                                 
+                                                 $contador = 0;
+                                                 foreach ($contratos as $contrato) {
+                                                     if ($producto['id'] == $contrato['id_producto']) {
+                                                         $contador++;
+                                                     }
+                                                 }
+                                                 echo $contador;
+                                                ?>
+                                            </td>
+                                            <td><a href="views/viewproducto.php?id_producto=<?php echo $producto['id']; ?>" data-toggle="tooltip" title="Ver Producto"><i class="fas fa-eye btn btn-primary micono"></i></a> <a  data-bs-toggle="modal"
+                                            data-bs-target="#modalupdate" href="#"  onclick="cargarDatosProducto(<?php echo $producto['id']; ?>)"  data-toggle="tooltip" title="Editar Cliente"><i class="fas fa-pencil-alt btn btn-success micono"></i></a> <a href="#" data-toggle="tooltip" title="Eliminar Cliente" onclick="eliminarProducto(<?php echo $producto['id']; ?>)"><i class="fas fa-trash-alt btn btn-danger micono"></i></a></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
             <div class="card-body">

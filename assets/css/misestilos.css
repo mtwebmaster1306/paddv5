@@ -253,9 +253,32 @@ li.items-list-compo i {
   font-size: 15px;
 
 }
+
 .sinfont{
   font-weight: 500;
 }
 .btn-narango{
   background: #EF4D36 !important;
+=======
+.btn.btn-success.micono, .btn.btn-danger.eliminar-producto.micono, .btn.btn-danger.micono.eliminar-comision {
+  height: 28px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+.btn.btn-danger.micono.delete-client {
+  height: 28px;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+#tipocliente, #region, #comuna  {
+  height: 42px !important;
+}
+.miformulario label {
+  margin-top: -10px !important;
+}
+.form-group.arriba {
+  margin-top: -16px;
+}
+.form-group.arriba2 {
+  margin-top: -15px;
 }
