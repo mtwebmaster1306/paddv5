@@ -38,6 +38,10 @@ $proveedoresMap = [];
 foreach ($proveedores as $proveedore) {
     $proveedoresMap[$proveedore['id_proveedor']] = $proveedore;
 }
+$soportesMap = [];
+foreach ($soportes as $soporte) {
+    $soportesMap[$soporte['id_soporte']] = $soporte;
+}
 
 $clientesMap = [];
 foreach ($clientes as $cliente) {
