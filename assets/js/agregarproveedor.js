@@ -135,8 +135,7 @@ async function submitForm2(event) {
             alert("Error al registrar el proveedor, intente nuevamente");
         }
     } catch (error) {
-        console.error("Error en la solicitud:", error);
-        alert("Error en la solicitud, intente nuevamente");
+        location.reload();
     }
 }
 
