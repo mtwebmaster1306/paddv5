@@ -12,7 +12,10 @@ $nombre = $_SESSION['user_name'];
 
 
 
-$ruta = 'https://organic-guacamole-xx6p44qpgjjfj9v-3000.app.github.dev/';
+
+$ruta = 'http://localhost:3000/';
+
+
 
 
 
@@ -34,11 +37,15 @@ $current_file = basename($_SERVER['PHP_SELF']);
   <!-- Template CSS -->
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/css/formulario.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/fontawesome.min.css">
+
+  
 
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/css/style.css">
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/css/components.css">
   <!-- Custom style CSS -->
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/fontawesome.min.css">
 
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/css/custom.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -69,7 +76,7 @@ $current_file = basename($_SERVER['PHP_SELF']);
         <ul class="navbar-nav navbar-right duo">
    Bienvenid@ - <?php echo htmlspecialchars($nombre); ?>
           <li class="dropdown"><a href="#" data-bs-toggle="dropdown"
-              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="assets/img/cristianImg.png"
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="<?php echo $ruta; ?>assets/img/cristianImg.png"
                 class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
               
