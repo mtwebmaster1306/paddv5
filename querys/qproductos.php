@@ -21,6 +21,8 @@ function makeRequest($url) {
     return json_decode($response, true);
 }
 
+
+
 // Obtener datos
 $campaigns = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Campania?select=*');
 $contadorcampaigns = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Campania?select=*');
@@ -31,8 +33,7 @@ $contadorcontratos = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/
 $agencias = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Agencias?select=*');
 $tipoclientes = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/TipoCliente?select=*');
 $planes = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/PlanesPublicidad?select=*');
-// Debug: Imprimir los datos de proveedores para verificar la estructura
-// var_dump($proveedores);
+
 
 $contadorcampaignsmaps = [];
 foreach ($contadorcampaigns as $campaign) {
@@ -85,3 +86,8 @@ $planesMap = [];
 foreach ($planes as $plane) {
     $planesMap[$plane['id_planes_publicidad']] = $plane;
 }
+
+
+
+
+

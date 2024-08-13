@@ -247,9 +247,15 @@ li.items-list-compo i {
 }
 .ttc{
   text-transform: capitalize;
-=======
+}
 .titulo-registro {
   color: #ef4d36;
   font-size: 15px;
 
+}
+.sinfont{
+  font-weight: 500;
+}
+.btn-narango{
+  background: #EF4D36 !important;
 }
