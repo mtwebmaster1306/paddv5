@@ -309,3 +309,7 @@ li.items-list-compo i {
   font-size: 20px !important;
   padding: 20px !important;
 }
+.svg-inline--fa.fa-user {
+  padding: 20px;
+  font-size: 20px;
+}

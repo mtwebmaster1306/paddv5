@@ -10,6 +10,42 @@ if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
 // Usar el nombre del usuario
 $user_name = $_SESSION['user_name'];
 
+
+// Función para obtener los clientes desde la API de Supabase
+function fetchClientes() {
+  $url = 'https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Clientes?select=*';
+  
+  // Asegúrate de reemplazar 'TU_API_KEY' con tu clave API real de Supabase
+  $options = [
+      'http' => [
+          'header' => "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc" .
+                      "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc"
+      ]
+  ];
+  
+  $context = stream_context_create($options);
+  $response = file_get_contents($url, false, $context);
+  
+  if ($response === FALSE) {
+      return [];
+  }
+  
+  return json_decode($response, true);
+}
+
+// Obtener los clientes
+$clientes = fetchClientes();
+
+
+
+
+
+
+
+
+
+
+
 include 'componentes/header.php';
 include 'componentes/sidebar.php';
 include 'querys/qdashboard.php';
@@ -120,7 +156,7 @@ include 'querys/qdashboard.php';
       <div class="col-6 col-sm-6 col-lg-4">
         <div class="card">
           <div class="card-header">
-            <h4 class="peque">Clientes Productos</h4>
+            <h4 class="peque">Productos</h4>
           </div>
           <div class="card-body">
             <canvas id="myPieChart"></canvas>
@@ -131,18 +167,17 @@ include 'querys/qdashboard.php';
 
         <div class="card">
           <div class="card-header">
-            <h4 class="peque">Aviso</h4>
+            <h4 class="peque">Listado de Clientes</h4>
           </div>
           <div class="card-body">
             <ul class="list-unstyled list-unstyled-border user-list" id="message-list">
-              <?php foreach ($avisos as $aviso): ?>
-
+            <?php foreach ($clientes as $cliente): ?>
                 <li class="items-list-compo">
-                <i class="fas fa-inbox"></i>
+                  <i class="fas fa-user"></i>
                   <div class="media-body w-100">
-                    <div class="mt-0 fw-bold ttc"><?php echo $aviso['mensaje'] ?></div>
-                    <div  class="text-small"> Fecha de creación: <?php echo formatDate($aviso['created_at']); ?></div>
-               
+                    <div class="mt-0 fw-bold ttc"><?php echo htmlspecialchars($cliente['nombreCliente']); ?></div>
+                    <div class="text-small">Dirección Empresa: <?php echo htmlspecialchars($cliente['direccionEmpresa']); ?></div>
+                    <div class="text-small">Teléfono Fijo: <?php echo htmlspecialchars($cliente['telFijo']); ?></div>
                   </div>
                 </li>
                 </tr>
