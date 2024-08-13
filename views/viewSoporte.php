@@ -19,6 +19,8 @@ if (!$idCliente) {
 
 // Obtener datos del cliente específico
 // Obtener datos del cliente específico
+$provedor_soportes = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/proveedor_soporte?select=*');
+$proveedores = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Proveedores?select=*');
 $soportes = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Soportes?select=*');
 $proveedor_medios = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/proveedor_medios?select=*');
 $url = "https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Soportes?id_soporte=eq.$idCliente&select=*";
@@ -26,6 +28,7 @@ $cliente = makeRequest($url);
 $soporte_medios = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/soporte_medios?select=*');
 $medios = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Medios?select=*');
 $proveedorS = makeRequest("https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Proveedores?id_proveedor=eq.$idCliente&select=*");
+
 // Verificar si se obtuvo el cliente
 if (empty($cliente) || !isset($cliente[0])) {
     die("No se encontró el cliente con el ID proporcionado.");
@@ -283,8 +286,8 @@ include '../componentes/sidebar.php';
                
               </div>
               <div class="col-12 col-md-12 col-lg-8">
-                <div class="card">
-                <table class="table table-striped" id="tableExportadora">
+                <div class="fel card">
+                <table class="table table-striped " id="tableExportadora">
     <thead>
         <tr>
             <th></th>
@@ -298,20 +301,20 @@ include '../componentes/sidebar.php';
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($proveedores_data as $proveedorll): ?>
-        <tr class="proveedor-row" data-proveedor-id="<?php echo $proveedorll['id_proveedor']; ?>">
+        <?php foreach ($proveedores as $proveedor): ?>
+        <tr class="proveedor-row" data-proveedor-id="<?php echo $proveedor['id_proveedor']; ?>">
             <td><i class="expand-icon fas fa-angle-right"></i></td>
-            <td><?php echo $proveedorll['id_proveedor']; ?></td>
+            <td><?php echo $proveedor['id_proveedor']; ?></td>
             <td>
                                                                                                         <?php
                                                             // Paso 1: Obtener todos los id_medios para un id_proveedor específico
-                                                            $id_proveedorc = $proveedorll['id_proveedor'];
+                                                            $id_proveedor = $proveedor['id_proveedor'];
 
                                                             // Realiza la solicitud para obtener los datos de la tabla proveedor_medios
 
                                                             $id_medios_array = [];
                                                             foreach ($proveedor_medios as $fila) {
-                                                                if ($fila['id_proveedor'] == $id_proveedorc) {
+                                                                if ($fila['id_proveedor'] == $id_proveedor) {
                                                                     $id_medios_array[] = $fila['id_medio'];
                                                                 }
                                                             }                 
@@ -340,14 +343,14 @@ include '../componentes/sidebar.php';
 
 
                                                         </td>
-            <td><?php echo $proveedorll['nombreProveedor']; ?></td>
-            <td><?php echo $proveedorll['razonSocial']; ?></td>
-            <td><?php echo $proveedorll['rutProveedor']; ?></td>
+            <td><?php echo $proveedor['nombreProveedor']; ?></td>
+            <td><?php echo $proveedor['razonSocial']; ?></td>
+            <td><?php echo $proveedor['rutProveedor']; ?></td>
             <td>
                 <?php
                     $contador = 0;
                     foreach ($soportes as $soporte) {
-                        if ($proveedorll['id_proveedor'] == $soporte['id_proveedor']) {
+                        if ($proveedor['id_proveedor'] == $soporte['id_proveedor']) {
                             $contador++;
                         }
                     }
@@ -356,14 +359,15 @@ include '../componentes/sidebar.php';
             </td>
             <td>
                 <!-- Acciones -->
-                <a class="btn btn-primary micono" href="views/viewProveedor.php?id_proveedor=<?php echo $proveedorll['id_proveedor']; ?>" data-toggle="tooltip" title="Ver Proveedor"><i class="fas fa-eye "></i></a>  
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#actualizarProveedor" data-idproveedor="<?php echo $proveedorll['id_proveedor']; ?>" onclick="loadProveedorData(this)"><i class="fas fa-pencil-alt"></i></button>
-                <a class="btn btn-danger micono" href="#" onclick="confirmarEliminacion(<?php echo htmlspecialchars($proveedorll['id_proveedor']); ?>); return false;" data-toggle="tooltip" title="Eliminar Proveedor"><i class="fas fa-trash-alt "></i></a>
+                <a class="btn btn-primary micono" href="views/viewProveedor.php?id_proveedor=<?php echo $proveedor['id_proveedor']; ?>" data-toggle="tooltip" title="Ver Proveedor"><i class="fas fa-eye "></i></a>  
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#actualizarProveedor" data-idproveedor="<?php echo $proveedor['id_proveedor']; ?>" onclick="loadProveedorData(this)"><i class="fas fa-pencil-alt"></i></button>
+                <a class="btn btn-danger micono" href="#" onclick="confirmarEliminacion(<?php echo htmlspecialchars($proveedor['id_proveedor']); ?>); return false;" data-toggle="tooltip" title="Eliminar Proveedor"><i class="fas fa-trash-alt "></i></a>
             </td>
         </tr>
-               <?php endforeach; ?>
-                    </tbody>
-                </table>                     
+
+        <?php endforeach; ?>
+    </tbody>
+</table>                
                   
                   </div>
                 </div>
@@ -464,5 +468,6 @@ include '../componentes/sidebar.php';
           
         </div>
       </div>
+      <script src="<?php echo $ruta; ?>assets/js/actualizarproveedor.js"></script>
 <?php include '../componentes/settings.php'; ?>
 <?php include '../componentes/footer.php'; ?>
