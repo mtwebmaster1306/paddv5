@@ -247,12 +247,19 @@ li.items-list-compo i {
 }
 .ttc{
   text-transform: capitalize;
-=======
+}
 .titulo-registro {
   color: #ef4d36;
   font-size: 15px;
 
 }
+
+.sinfont{
+  font-weight: 500;
+}
+.btn-narango{
+  background: #EF4D36 !important;
+=======
 .btn.btn-success.micono, .btn.btn-danger.eliminar-producto.micono, .btn.btn-danger.micono.eliminar-comision {
   height: 28px !important;
   padding-top: 0px !important;
@@ -274,5 +281,4 @@ li.items-list-compo i {
 }
 .form-group.arriba2 {
   margin-top: -15px;
-
 }

@@ -61,16 +61,15 @@ function cargarTipoCliente() {
   
 
 
+  
 function obtenerValoresFormulario(event) {
     event.preventDefault(); // Evita que el formulario se envíe
 
     const form = document.getElementById('agregarproducto');
     const valores = {
         id: Math.floor(Math.random() * 1000000000),
-        cliente: form.cliente.value,
-        idTipoCliente: form.idTipoCliente.value,
         nombreProducto: form.nombreProducto.value,
-        razonSocial: form.razonSocial.value
+        Id_Cliente: form.clientes.value
     };
 
  
@@ -88,12 +87,7 @@ function obtenerValoresFormulario(event) {
     let bodyContent = JSON.stringify({
         "id": Math.floor(Math.random() * 1000000000),
         "NombreDelProducto": form.nombreProducto.value,
-        "Id_Cliente":  parseInt(form.cliente.value),
-        "Id_TipoDeCliente": form.idTipoCliente.value,
-        "RazonSocial": form.razonSocial.value,
-        "Id_Agencia": null,
-        "Id_Campañas": 1,
-        "Id_PlanesPublicidad": null
+        "Id_Cliente": form.clientes.value
     });
 
     

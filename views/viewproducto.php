@@ -35,8 +35,8 @@ include '../componentes/sidebar.php';
 
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="<?php echo $ruta; ?>/dashboard">Home</a></li>
-      <li class="breadcrumb-item"><a href="<?php echo $ruta; ?>/ListProductos.php">Ver Productos</a></li>
+      <li class="breadcrumb-item"><a href="<?php echo $ruta; ?>dashboard">Home</a></li>
+      <li class="breadcrumb-item"><a href="<?php echo $ruta; ?>ListProductos.php">Ver Productos</a></li>
       <li class="breadcrumb-item active" aria-current="page"><?php echo $datosProducto['NombreDelProducto']; ?></li>
     </ol>
   </nav>
@@ -48,12 +48,14 @@ include '../componentes/sidebar.php';
             <div class="card-body">
               <div class="author-box-center">
                 <div class="clearfix"></div>
+                <div class="author-box-job">
+                Nombre Producto:
+           </div>
                 <div class="nombrex author-box-name">
+               
                   <?php echo $datosProducto['NombreDelProducto']; ?>
                 </div>
-                <div class="author-box-job">
-                  <?php echo $datosProducto['RazonSocial']; ?>
-                </div>
+              
               </div>
             </div>
           </div>
@@ -69,6 +71,9 @@ include '../componentes/sidebar.php';
               <div class="tab-content tab-bordered" id="myTab3Content">
                 <div class="tab-pane fade show active" id="facturacion" role="tabpanel" aria-labelledby="home-tab2">
                   <div class="row">
+                  <div class="col-md-3 col-6">
+
+</div>
                     <div class="col-md-3 col-6 b-r">
                       <strong>Id</strong>
                       <br>
@@ -83,44 +88,9 @@ include '../componentes/sidebar.php';
                         ?>
                     </p>
                     </div>
+              
                     <div class="col-md-3 col-6">
-                      <strong>Total campañas
-                      </strong>
-                      <br>
-                      <p class="text-muted">
-
-                      <?php
-                                                // Verificar si existe la campaña en $campaignMap
-                                                if (isset($contadorcampaignsmaps[$datosProducto['Id_Campañas']])) {
-                                                    // Obtener el nombre de la clasificación
-                                                    $nombreClasificacion = $contadorcampaignsmaps[$datosProducto['Id_Campañas']]['id_campania'];
-                                
-
-                                                    // Obtener y mostrar el contador
-                                                    $contador = $contadorcampaignsmaps[$datosProducto['Id_Campañas']]['count'] ?? 0;
-                                                    echo  $contador;
-                                                } else {
-                                                    echo '0'; // Mostrar cadena vacía si no se encuentra la campaña
-                                                }
-                                                ?>
-                      </p>
-                    </div>
-                    <div class="col-md-3 col-6">
-                      <strong>Total contratos
-                      </strong>
-                      <br>
-                      <p class="text-muted">
-                      <?php
-                                                 
-                                                 $contador = 0;
-                                                 foreach ($contratos as $contrato) {
-                                                     if ($datosProducto['id'] == $contrato['id_producto']) {
-                                                         $contador++;
-                                                     }
-                                                 }
-                                                 echo $contador;
-                                                ?>
-                      </p>
+                
                     </div>
                   </div>
                 </div>

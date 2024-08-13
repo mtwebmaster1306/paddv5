@@ -34,8 +34,8 @@ include 'querys/qdashboard.php';
               <div class="row align-items-center">
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pr-0 pt-3">
                   <div class="card-content">
-                    <h5 class="font-15">Cantidad Agencias</h5>
-                    <h2 class="mb-3 font-18"><?php echo $agenciasCount; ?></h2>
+                    <h5 class="font-15">N° Agencias</h5>
+                    <h2 class="mb-3 font-18 sinfont"><?php echo $agenciasCount; ?></h2>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pl-0">
@@ -55,8 +55,8 @@ include 'querys/qdashboard.php';
               <div class="row align-items-center">
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pr-0 pt-3">
                   <div class="card-content">
-                    <h5 class="font-15">Cantidad de Clientes</h5>
-                    <h2 class="mb-3 font-18"><?php echo $clientesCount; ?></h2>
+                    <h5 class="font-15">N° de Clientes</h5>
+                    <h2 class="mb-3 font-18 sinfont"><?php echo $clientesCount; ?></h2>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pl-0">
@@ -76,8 +76,8 @@ include 'querys/qdashboard.php';
               <div class="row align-items-center">
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pr-0 pt-3">
                   <div class="card-content">
-                    <h5 class="font-15">Total campañas</h5>
-                    <h2 class="mb-3 font-18"><?php echo $campaignsCount; ?></h2>
+                    <h5 class="font-15">N° campañas</h5>
+                    <h2 class="mb-3 font-18 sinfont"><?php echo $campaignsCount; ?></h2>
 
                   </div>
                 </div>
@@ -98,8 +98,8 @@ include 'querys/qdashboard.php';
               <div class="row align-items-center">
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pr-0 pt-3">
                   <div class="card-content">
-                    <h5 class="font-15">Cantidad de medios</h5>
-                    <h2 class="mb-3 font-18"><?php echo $mediosCount; ?></h2>
+                    <h5 class="font-15">N° de medios</h5>
+                    <h2 class="mb-3 font-18 sinfont"><?php echo $mediosCount; ?></h2>
 
                   </div>
                 </div>
@@ -142,7 +142,7 @@ include 'querys/qdashboard.php';
                   <div class="media-body w-100">
                     <div class="mt-0 fw-bold ttc"><?php echo $aviso['mensaje'] ?></div>
                     <div  class="text-small"> Fecha de creación: <?php echo formatDate($aviso['created_at']); ?></div>
-                    <div class="badge badge-pill badge-primary  float-right">Realizado</div>
+               
                   </div>
                 </li>
                 </tr>
