@@ -81,7 +81,7 @@ include 'componentes/sidebar.php';
 </label>
     </div>
 </td>
-                                            <td><a href="views/viewAgencia.php?id=<?php echo $agencia['id']; ?>" data-toggle="tooltip" title="Ver Agencia"><i class="fas fa-eye btn btn-primary micono"></i></a>   <button type="button" class="btn btn-success micono" data-bs-toggle="modal" data-bs-target="#actualizaragencia" data-idagencia    ="<?php echo $agencia['id']; ?>" onclick="loadAgenciaData(this)">
+                                            <td><a href="views/viewAgencia.php?id=<?php echo $agencia['id']; ?>" data-toggle="tooltip" title="Ver Agencia"><i class="fas fa-eye btn btn-primary miconoz"></i></a>   <button type="button" class="btn btn-success micono" data-bs-toggle="modal" data-bs-target="#actualizaragencia" data-idagencia    ="<?php echo $agencia['id']; ?>" onclick="loadAgenciaData(this)">
                             <i class="fas fa-pencil-alt"></i>
                         </button> <a href="#" data-toggle="tooltip" title="Eliminar Agencia" onclick="eliminarAgencia(<?php echo $agencia['id']; ?>)"><i class="fas fa-trash-alt btn btn-danger micono"></i></a></td>
                                         </tr>

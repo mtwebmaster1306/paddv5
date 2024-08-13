@@ -45,7 +45,7 @@ $current_file = basename($_SERVER['PHP_SELF']);
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/css/components.css">
   <!-- Custom style CSS -->
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/fontawesome.min.css">
+
 
   <link rel="stylesheet" href="<?php echo $ruta; ?>assets/css/custom.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">

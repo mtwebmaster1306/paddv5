@@ -43,8 +43,9 @@ include 'componentes/sidebar.php';
                         <td><?php echo $producto['NombreDelProducto']; ?></td>
 
 
-                        <td><a href="views/viewproducto.php?id_producto=<?php echo $producto['id']; ?>" data-toggle="tooltip" title="Ver Producto"><i class="fas fa-eye btn btn-primary micono"></i></a> <a data-bs-toggle="modal"
-                            data-bs-target="#modalupdate" href="#" onclick="cargarDatosProducto(<?php echo $producto['id']; ?>)" data-toggle="tooltip" title="Editar Cliente"><i class="fas fa-pencil-alt btn btn-success micono"></i></a> <a href="#" data-toggle="tooltip" title="Eliminar Cliente" onclick="eliminarProducto(<?php echo $producto['id']; ?>)"><i class="fas fa-trash-alt btn btn-danger micono"></i></a></td>
+                        <td><a href="views/viewproducto.php?id_producto=<?php echo $producto['id']; ?>" data-toggle="tooltip" title="Ver Producto"><i class="fas fa-eye btn btn-primary miconoz"></i></a> 
+                        <a data-bs-toggle="modal"
+                            data-bs-target="#modalupdate" href="#" onclick="cargarDatosProducto(<?php echo $producto['id']; ?>)" data-toggle="tooltip" title="Editar Cliente"><i class="fas fa-pencil-alt btn btn-success miconoz"></i></a> <a href="#" data-toggle="tooltip" title="Eliminar Cliente" onclick="eliminarProducto(<?php echo $producto['id']; ?>)"><i class="fas fa-trash-alt btn btn-danger micono"></i></a></td>
                       </tr>
                     <?php endforeach; ?>
                   </tbody>

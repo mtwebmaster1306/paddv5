@@ -44,14 +44,14 @@ include 'componentes/sidebar.php';
                                             <td><?php echo $medio['NombredelMedio']; ?></td>
                                             <td><?php echo $medio['codigo']; ?></td>
                                             <td><?php echo $clasifiacionmediosMap[$medio['Id_Clasificacion']]['NombreClasificacion'] ?? ''; ?></td>
-                                            <td><a href="views/viewMedio.php?id=<?php echo $medio['id']; ?>" data-toggle="tooltip" title="Ver Medio"><i class="fas fa-eye btn btn-primary micono"></i></a> 
+                                            <td><a href="views/viewMedio.php?id=<?php echo $medio['id']; ?>" data-toggle="tooltip" title="Ver Medio"><i class="fas fa-eye btn btn-primary miconoz"></i></a> 
                                             <a href="#" 
    class="btn6 open-modal" 
    data-bs-toggle="modal" 
    data-bs-target="#exampleModal" 
    data-toggle="tooltip" 
    title="Editar Medio">
-    <i class="fas fa-pencil-alt btn btn-success micono"></i></a>
+    <i class="fas fa-pencil-alt btn btn-success miconoz"></i></a>
                                             
                                             <a type="button" href="#" onclick="confirmarEliminacion(<?php echo htmlspecialchars($medio['id']); ?>); return false;" data-toggle="tooltip" title="Eliminar Medio">
                                                 <i class="fas fa-trash-alt btn btn-danger micono"></i>
