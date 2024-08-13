@@ -22,6 +22,7 @@ function makeRequest($url) {
 }
 
 // Obtener datos
+$provedor_soportes = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/proveedor_soporte?select=*');
 $proveedor_medios = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/proveedor_medios?select=*');
 $soporte_medios = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/soporte_medios?select=*');
 $proveedores = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Proveedores?select=*');
@@ -58,3 +59,7 @@ foreach ($soportecounts as $soportecount) {
 
 $regionesMap = array_column($regiones, 'nombreRegion', 'id');
 $comunasMap = array_column($comunas, 'nombreComuna', 'id_comuna');
+
+
+
+
