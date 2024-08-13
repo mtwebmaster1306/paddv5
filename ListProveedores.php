@@ -133,7 +133,7 @@ include 'componentes/sidebar.php';
                 <!-- Acciones -->
                 <a class="btn btn-primary micono" href="views/viewProveedor.php?id_proveedor=<?php echo $proveedor['id_proveedor']; ?>" data-toggle="tooltip" title="Ver Proveedor"><i class="fas fa-eye "></i></a>  
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#actualizarProveedor" data-idproveedor="<?php echo $proveedor['id_proveedor']; ?>" onclick="loadProveedorData(this)"><i class="fas fa-pencil-alt"></i></button>
-                <a class="btn btn-danger micono" href="#" onclick="confirmarEliminacion(<?php echo htmlspecialchars($proveedor['id_proveedor']); ?>); return false;" data-toggle="tooltip" title="Eliminar Proveedor"><?php echo htmlspecialchars($proveedor['id_proveedor']); ?><i class="fas fa-trash-alt "></i></a>
+                <a class="btn btn-danger micono" href="#" onclick="confirmarEliminacion(<?php echo htmlspecialchars($proveedor['id_proveedor']); ?>); return false;" data-toggle="tooltip" title="Eliminar Proveedor"><i class="fas fa-trash-alt "></i></a>
             </td>
         </tr>
         <tr class="expandable-row" id="subtable-<?php echo $proveedor['id_proveedor']; ?>" style="display:none;">
@@ -217,7 +217,7 @@ include 'componentes/sidebar.php';
                 <!-- Acciones -->
                 <a class="btn btn-primary micono" href="views/viewSoporte.php?id_soporte=<?php echo $soporte['id_soporte']; ?>" data-toggle="tooltip" title="Ver Soporte"><i class="fas fa-eye "></i></a>  
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#actualizarSoporte" data-id-soporte="<?php echo htmlspecialchars($soporte['id_soporte']); ?>" data-idproveedor="<?php echo $proveedor['id_proveedor']; ?>" onclick="loadProveedorDataSoporte(this)"><i class="fas fa-pencil-alt"></i></button>
-                <a class="btn btn-danger micono" href="#" onclick="confirmarEliminacionSoporte(<?php echo htmlspecialchars($soporte['id_soporte']); ?>); return false;" data-toggle="tooltip" title="Eliminar Proveedor"><i class="fas fa-trash-alt "></i><?php echo htmlspecialchars($soporte['id_soporte']); ?></a>
+                <a class="btn btn-danger micono" href="#" onclick="confirmarEliminacionSoporte(<?php echo htmlspecialchars($soporte['id_soporte']); ?>); return false;" data-toggle="tooltip" title="Eliminar Proveedor"><i class="fas fa-trash-alt "></i></a>
             </td>
                             </tr>
                             <?php endif; ?>
@@ -377,181 +377,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 //Modal Edit Proveedor
-// MODAL ACTUALIZAR SOPORTE
-<div class="modal fade" id="actualizarSoporte" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <!-- Alerta para mostrar el resultado de la actualización -->
-                <div id="updateAlert" class="alert" style="display:none;" role="alert"></div>
-
-                <form id="formularioactualizarSoporte">
-                    <!-- Campos del formulario -->
-                    <div>
-                        <h3 class="titulo-registro mb-3">Actualizar Soporte</h3>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="codigo">Nombre Identificador</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-user-circle"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Nombre Identificador" name="nombreIdentificador">
-                                    </div>
-                                   
-                                    
-                                    <label class="labelforms" for="codigo">Nombre Representante</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-user"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Nombre Representante" name="nombreRepresentante">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="codigo">Rut Soporte</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-address-card"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Rut Soporte" name="rutRepresentantexx">
-                                    </div>
-                                    <label class="labelforms" for="codigo">Giro Soporte</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-suitcase"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Giro Proveedor" name="giroProveedor">
-                                    </div>
-                                    <label class="labelforms" for="codigo">Nombre de Fantasía</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-hand-spock"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Nombre de Fantasía" name="nombreFantasia">
-                                    </div>
-                                    <label class="labelforms" for="codigo">Rut Representante</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-address-card"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Rut Representante" name="rutRepresentante">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="titulo-registro mb-3">Datos de facturación</h3>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="codigo">Razón Social</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-bullseye"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Razón Social" name="razonSocial">
-                                    </div>
-                                    <label class="labelforms" for="codigo">Región</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-location-arrow"></i></span>
-                                        </div>
-                                        <select class="sesel form-select" name="id_region" id="region" required>
-                                            <?php foreach ($regiones as $regione) : ?>
-                                                <option value="<?php echo $regione['id']; ?>"><?php echo $regione['nombreRegion']; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                    <label class="labelforms" for="codigo">Teléfono celular</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Teléfono celular" name="telCelular">
-                                    </div>
-                                    <label class="labelforms" for="codigo">Email</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Email" name="email">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="codigo">Dirección Facturación</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-building"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Dirección Facturación" name="direccion">
-                                    </div>
-                                    <label class="labelforms" for="codigo">Comuna</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-location-arrow"></i></span>
-                                        </div>
-                                        <select class="sesel form-select" name="id_comuna" id="comuna" required>
-                                            <?php foreach ($comunas as $comuna) : ?>
-                                                <option value="<?php echo $comuna['id_comuna']; ?>" data-region="<?php echo $comuna['id_region']; ?>">
-                                                    <?php echo $comuna['nombreComuna']; ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                    <label class="labelforms" for="codigo">Teléfono fijo</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Teléfono fijo" name="telFijo">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <h3 class="titulo-registro mb-3">Otros datos</h3>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="codigo">Bonifiación por año %</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Bonifiación por año %" name="bonificacion_ano">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col" id="moneda-container">
-                                <div class="form-group">
-                                    <label for="codigo">Escala de rango</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-chart-bar"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Escala de rango" name="escala_rango">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end mt-3">
-                        <button class="btn btn-primary btn-lg rounded-pill" type="button" id="actualizarProveedor">
-                            <span class="btn-txt">Guardar Proveedor</span>
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display:none;"></span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="actualizarProveedor" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -573,7 +398,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-user-circle"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Nombre Identificador" name="nombreIdentificador">
+                                        <input type="hidden" name="idprooo">
+                                        <input class="form-control" placeholder="Nombre Identificador" name="nombreIdentificadorp">
                                     </div>
                                     <label class="labelforms" for="codigo">Medios</label>
                                     <div class="input-group dropdown" id="dropdown1">
@@ -596,14 +422,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-user"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Nombre de Proveedor" name="nombreProveedor">
+                                        <input class="form-control" placeholder="Nombre de Proveedor" name="nombreProveedorp">
                                     </div>
                                     <label class="labelforms" for="codigo">Nombre Representante</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-user"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Nombre Representante" name="nombreRepresentante">
+                                        <input class="form-control" placeholder="Nombre Representante" name="nombreRepresentantep">
                                     </div>
                                 </div>
                             </div>
@@ -614,28 +440,28 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-address-card"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Rut Proveedor" name="rutProveedor">
+                                        <input class="form-control" placeholder="Rut Proveedor" name="rutProveedorp">
                                     </div>
                                     <label class="labelforms" for="codigo">Giro Proveedor</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-suitcase"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Giro Proveedor" name="giroProveedor">
+                                        <input class="form-control" placeholder="Giro Proveedor" name="giroProveedorp">
                                     </div>
                                     <label class="labelforms" for="codigo">Nombre de Fantasía</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-hand-spock"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Nombre de Fantasía" name="nombreFantasia">
+                                        <input class="form-control" placeholder="Nombre de Fantasía" name="nombreFantasiap">
                                     </div>
                                     <label class="labelforms" for="codigo">Rut Representante</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-address-card"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Rut Representante" name="rutRepresentante">
+                                        <input class="form-control" placeholder="Rut Representante" name="rutRepresentantep">
                                     </div>
                                 </div>
                             </div>
@@ -651,14 +477,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-bullseye"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Razón Social" name="razonSocial">
+                                        <input class="form-control" placeholder="Razón Social" name="razonSocialp">
                                     </div>
                                     <label class="labelforms" for="codigo">Región</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-location-arrow"></i></span>
                                         </div>
-                                        <select class="sesel form-select" name="id_region" id="region" required>
+                                        <select class="sesel form-select" name="id_regionp" id="region" required>
                                             <?php foreach ($regiones as $regione) : ?>
                                                 <option value="<?php echo $regione['id']; ?>"><?php echo $regione['nombreRegion']; ?></option>
                                             <?php endforeach; ?>
@@ -669,14 +495,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Teléfono celular" name="telCelular">
+                                        <input class="form-control" placeholder="Teléfono celular" name="telCelularp">
                                     </div>
                                     <label class="labelforms" for="codigo">Email</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-envelope"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Email" name="email">
+                                        <input class="form-control" placeholder="Email" name="emailp">
                                     </div>
                                 </div>
                             </div>
@@ -687,14 +513,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-building"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Dirección Facturación" name="direccionFacturacion">
+                                        <input class="form-control" placeholder="Dirección Facturación" name="direccionFacturacionp">
                                     </div>
                                     <label class="labelforms" for="codigo">Comuna</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-location-arrow"></i></span>
                                         </div>
-                                        <select class="sesel form-select" name="id_comuna" id="comuna" required>
+                                        <select class="sesel form-select" name="id_comunap" id="comuna" required>
                                             <?php foreach ($comunas as $comuna) : ?>
                                                 <option value="<?php echo $comuna['id_comuna']; ?>" data-region="<?php echo $comuna['id_region']; ?>">
                                                     <?php echo $comuna['nombreComuna']; ?>
@@ -707,7 +533,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Teléfono fijo" name="telFijo">
+                                        <input class="form-control" placeholder="Teléfono fijo" name="telFijop">
                                     </div>
                                 </div>
                             </div>
@@ -721,7 +547,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Bonifiación por año %" name="bonificacion_ano">
+                                        <input class="form-control" placeholder="Bonifiación por año %" name="bonificacion_anop">
                                     </div>
                                 </div>
                             </div>
@@ -732,14 +558,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-chart-bar"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Escala de rango" name="escala_rango">
+                                        <input class="form-control" placeholder="Escala de rango" name="escala_rangop">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-end mt-3">
-                        <button class="btn btn-primary btn-lg rounded-pill" type="button" id="actualizarProveedor">
+                        <button class="btn btn-primary btn-lg rounded-pill" type="submit" id="actualizarProveedor">
                             <span class="btn-txt">Guardar Proveedor</span>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display:none;"></span>
                         </button>
@@ -749,6 +575,199 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
           </div>
         </div>
+// MODAL ACTUALIZAR SOPORTE
+<div class="modal fade" id="actualizarSoporte" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <!-- Alerta para mostrar el resultado de la actualización -->
+                <div id="updateAlert" class="alert" style="display:none;" role="alert"></div>
+
+                <form id="formularioactualizarSoporte">
+                    <!-- Campos del formulario -->
+                    <div>
+                        <h3 class="titulo-registro mb-3">Actualizar Soporte</h3>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="codigo">Nombre Identificador</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-user-circle"></i></span>
+                                        </div>
+                                        <input type="hidden" name="rutProveedorx">
+                                        <input class="form-control" placeholder="Nombre Identificador" name="nombreIdentificadorx">
+                                    </div>
+                                   
+                                    
+                                    <label class="labelforms" for="codigo">Nombre Representante</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-user"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Nombre Representante" name="nombreRepresentantex">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Medios</label>
+                                    <div class="input-group dropdown" id="dropdown2">
+                                        <div class="sell input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                        </div>
+                                        <div class="selected-options" onclick="toggleDropdown()"></div>
+                                        <button type="button" class="dropdown-button" style="display:none;">Select Medios</button>
+                                        <div class="dropdown-content">
+                                            <?php foreach ($medios as $medio) : ?>
+                                                <label>
+                                                    <input type="checkbox" name="id_medios[]" value="<?php echo $medio['id']; ?>">
+                                                    <?php echo $medio['NombredelMedio']; ?>
+                                                </label>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="codigo">Rut Soporte</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-address-card"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Rut Soporte" name="rutSoporte">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Giro Soporte</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-suitcase"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Giro Proveedor" name="giroProveedorx">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Nombre de Fantasía</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-hand-spock"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Nombre de Fantasía" name="nombreFantasiax">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Rut Representante</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-address-card"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Rut Representante" name="rutRepresentantex">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="titulo-registro mb-3">Datos de facturación</h3>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="codigo">Razón Social</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-bullseye"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Razón Social" name="razonSocialx">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Región</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-location-arrow"></i></span>
+                                        </div>
+                                        <select class="sesel form-select" name="id_regionx" id="region" required>
+                                            <?php foreach ($regiones as $regione) : ?>
+                                                <option value="<?php echo $regione['id']; ?>"><?php echo $regione['nombreRegion']; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <label class="labelforms" for="codigo">Teléfono celular</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Teléfono celular" name="telCelularx">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Email</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Email" name="emailx">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="codigo">Dirección Facturación</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-building"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Dirección Facturación" name="direccionx">
+                                    </div>
+                                    <label class="labelforms" for="codigo">Comuna</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-location-arrow"></i></span>
+                                        </div>
+                                        <select class="sesel form-select" name="id_comunax" id="comuna" required>
+                                            <?php foreach ($comunas as $comuna) : ?>
+                                                <option value="<?php echo $comuna['id_comuna']; ?>" data-region="<?php echo $comuna['id_region']; ?>">
+                                                    <?php echo $comuna['nombreComuna']; ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <label class="labelforms" for="codigo">Teléfono fijo</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Teléfono fijo" name="telFijox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="titulo-registro mb-3">Otros datos</h3>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="codigo">Bonifiación por año %</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Bonifiación por año %" name="bonificacion_anox">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col" id="moneda-container">
+                                <div class="form-group">
+                                    <label for="codigo">Escala de rango</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-chart-bar"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Escala de rango" name="escala_rangox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end mt-3">
+                        <button class="btn bn-padd micono" type="submit" id="actualizarProveedor">
+                            <span class="btn-txt">Guardar Soporte</span>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display:none;"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 //fin editar modal
 
 
@@ -1487,35 +1506,7 @@ function getSoporteData(idSoporte) {
 
 
 
-function loadProveedorData(button) {
-    var idProveedor = button.getAttribute('data-idproveedor');
-    var proveedor = getProveedorData(idProveedor);
 
-    if (proveedor) {
-        console.log('Datos del proveedor:', proveedor);
-        document.querySelector('input[name="id_proveedor"]').value = proveedor.id_proveedor;
-        document.querySelector('input[name="nombreIdentificador"]').value = proveedor.nombreIdentificador;
-        document.querySelector('input[name="nombreProveedor"]').value = proveedor.nombreProveedor;
-        document.querySelector('input[name="nombreFantasia"]').value = proveedor.nombreFantasia;
-        document.querySelector('input[name="rutProveedor"]').value = proveedor.rutProveedor;
-        document.querySelector('input[name="giroProveedor"]').value = proveedor.giroProveedor;
-        document.querySelector('input[name="nombreRepresentante"]').value = proveedor.nombreRepresentante;
-        document.querySelector('input[name="rutRepresentante"]').value = proveedor.rutRepresentante;
-        document.querySelector('input[name="razonSocial"]').value = proveedor.razonSocial;
-        document.querySelector('input[name="direccionFacturacion"]').value = proveedor.direccionFacturacion;
-        document.querySelector('select[name="id_region"]').value = proveedor.id_region;
-        document.querySelector('select[name="id_comuna"]').value = proveedor.id_comuna;
-        document.querySelector('input[name="telCelular"]').value = proveedor.telCelular;
-        document.querySelector('input[name="telFijo"]').value = proveedor.telFijo;
-        document.querySelector('input[name="email"]').value = proveedor.email;
-        document.querySelector('input[name="bonificacion_ano"]').value = proveedor.bonificacion_ano;
-        document.querySelector('input[name="escala_rango"]').value = proveedor.escala_rango;
-
-       
-    } else {
-        console.log("No se encontró el proveedor con ID:", idProveedor);
-    }
-}
 
 
 
@@ -1577,7 +1568,98 @@ document.getElementById('region').dispatchEvent(new Event('change'));
 
 
 
-
+<script>
+function confirmarEliminacion(id) {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "No podrás revertir esta acción!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminar!',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Si el usuario confirma, procedemos con la eliminación
+            fetch(`/querys/modulos/deleteProveedor.php?id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire(
+                            'Eliminado!',
+                            'El Proveedor ha sido eliminado.',
+                            'success'
+                        ).then(() => {
+                            // Redirigir a ListMedios.php después de cerrar la alerta
+                            window.location.href = 'ListProveedores.php';
+                        });
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            'No se pudo eliminar el Proveedor.',
+                            'error'
+                        );
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire(
+                        'Error!',
+                        'Ocurrió un error al intentar eliminar el medio.',
+                        'error'
+                    );
+                });
+        }
+    });
+}
+</script>
+<script>
+function confirmarEliminacionSoporte(id) {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "No podrás revertir esta acción!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminar!',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Si el usuario confirma, procedemos con la eliminación
+            fetch(`/querys/modulos/deleteSoporte.php?id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire(
+                            'Eliminado!',
+                            'El Soporte ha sido eliminado.',
+                            'success'
+                        ).then(() => {
+                            // Redirigir a ListMedios.php después de cerrar la alerta
+                            window.location.href = 'ListProveedores.php';
+                        });
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            'No se pudo eliminar el Soporte.',
+                            'error'
+                        );
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire(
+                        'Error!',
+                        'Ocurrió un error al intentar eliminar el Soporte.',
+                        'error'
+                    );
+                });
+        }
+    });
+}
+</script>
 
 
 
