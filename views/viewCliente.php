@@ -158,7 +158,14 @@ include '../componentes/sidebar.php';
                                         <?php echo $datosCliente['nombreRepresentanteLegal'] ; ?>
                                     </span>
                                 </p>
-                        
+                                <p class="clearfix">
+                                    <span class="float-start">
+                                        RUT Representante Legal
+                                    </span>
+                                    <span class="float-right text-muted">
+                                        <?php echo $datosCliente['RUT_representante'] ; ?>
+                                    </span>
+                                </p>
                                
                              
                                
@@ -194,34 +201,34 @@ include '../componentes/sidebar.php';
                                 <div class="tab-pane fade show active" id="facturacion" role="tabpanel"
                                     aria-labelledby="home-tab2">
                                     <div class="row">
-                                        <div class="col-md-2 col-6 b-r">
+                                        <div class="col-md-3 col-6 b-r">
                                             <strong>Razon Social</strong>
                                             <br>
                                             <p class="text-muted"><?php echo $datosCliente['razonSocial'] ; ?></p>
                                         </div>
-                                        <div class="col-md-2 col-6 b-r">
+                                        <div class="col-md-3 col-6 b-r">
                                             <strong>RUT Empresa</strong>
                                             <br>
                                             <p class="text-muted"><?php echo $datosCliente['RUT'] ; ?></p>
                                         </div>
-                                        <div class="col-md-2 col-6 b-r">
+                                        <div class="col-md-3 col-6 b-r">
                                             <strong>Región</strong>
                                             <br>
                                             <p class="text-muted">
                                                 <?php echo $regionesMap[$datosCliente['id_region']] ?? ''; ?></p>
                                         </div>
-                                        <div class="col-md-2 col-6">
+                                        <div class="col-md-3 col-6">
                                             <strong>Comuna</strong>
                                             <br>
                                             <p class="text-muted">
                                                 <?php echo $comunasMap[$datosCliente['id_comuna']] ?? ''; ?></p>
                                         </div>
-                                        <div class="col-md-2 col-6">
+                                        <div class="col-md-3 col-6">
                                             <strong>Dirección</strong>
                                             <br>
                                             <p class="text-muted"><?php echo $datosCliente['direccionEmpresa'] ; ?></p>
                                         </div>
-                                        <div class="col-md-2 col-6">
+                                        <div class="col-md-3 col-6">
                                             <strong>Facturación</strong>
                                             <br>
                                             <p class="text-muted">
@@ -309,10 +316,14 @@ include '../componentes/sidebar.php';
                                                 <td><?php echo htmlspecialchars($fechaTermino); ?></td>
                                                 <td><input type="hidden" class="id_comision"
                                                         value="<?php echo htmlspecialchars($comision['id_comision'] ?? 'No disponible'); ?>">
-                                                    <button type="button" class="btn btn-success micono"
-                                                        data-bs-toggle="modal" data-bs-target="#actualizarcomisionModal"
-                                                        data-idcomision="" data-toggle="tooltip" title="Editar"><i
-                                                            class="fas fa-pencil-alt"></i></button>
+                                                        <button type="button" class="btn btn-success micono" 
+        data-bs-toggle="modal" 
+        data-bs-target="#actualizarcomisionModal"
+        data-idcomision="<?php echo htmlspecialchars($comision['id_comision']); ?>" 
+        data-toggle="tooltip" 
+        title="Editar">
+    <i class="fas fa-pencil-alt"></i>
+</button>
                                                     <button type="button"
                                                         class="btn btn-danger micono eliminar-comision"
                                                         data-idcomision="<?php echo htmlspecialchars($comision['id_comision'] ?? ''); ?>"
@@ -344,7 +355,7 @@ include '../componentes/sidebar.php';
                                             <tr>
                                                 <th>Nombre Producto</th>
                                                 <th>N° Campañas</th>
-                                                <th>N° Contratos</th>
+                                            
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>
@@ -383,9 +394,8 @@ include '../componentes/sidebar.php';
     ?>
                                                     <p><?php echo htmlspecialchars($conteo); ?></p>
                                                 </td>
-                                                <td><?php echo htmlspecialchars($datosCliente['telCelular']); ?></td>
-                                                <td> <a href="" data-toggle="tooltip" title="Ver Producto"><i
-                                                            class="fas fa-eye btn btn-primary micono"></i></a>
+                                              
+                                                <td>
 
                                                     <button type="button"
                                                         class="btn btn-danger eliminar-producto micono"
@@ -592,7 +602,83 @@ include '../componentes/sidebar.php';
 </div>
 
 
+<div class="modal fade" id="actualizarcomisionModal" tabindex="-1" role="dialog" aria-labelledby="actualizarComisionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="actualizarComisionModalLabel">ACTUALIZAR COMISIÓN</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="actualizarComisionForm">
 
+                    <input type="hidden" id="actualizar_id_comision" name="id_comision">
+                    <input type="hidden" name="id_cliente" value="<?php echo $idCliente; ?>">
+                    <div class="form-group">
+                        <label for="actualizar_nombreMoneda">Comisión</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-money-bill-alt"></i></span>
+                            </div>
+                            <select class="form-control" id="actualizar_nombreMoneda" name="nombreMoneda">
+                                <?php foreach ($monedas as $moneda): ?>
+                                <option value="<?php echo htmlspecialchars($moneda['id_moneda']); ?>">
+                                    <?php echo htmlspecialchars($moneda['nombreMoneda']); ?>
+                                </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="actualizar_valorComision">Valor</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="actualizar_valorComision" name="valorComision">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="actualizar_nombreFormato">Formato</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-percent"></i></span>
+                            </div>
+                            <select class="form-control" id="actualizar_nombreFormato" name="nombreFormato">
+                                <?php foreach ($formatos as $formato): ?>
+                                <option value="<?php echo htmlspecialchars($formato['id_formatoComision']); ?>">
+                                    <?php echo htmlspecialchars($formato['nombreFormato']); ?>
+                                </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="actualizar_inicioComision">Fecha Inicio</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                            </div>
+                            <input type="date" class="form-control" id="actualizar_inicioComision" name="inicioComision">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="actualizar_finComision">Fecha Término</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                            </div>
+                            <input type="date" class="form-control" id="actualizar_finComision" name="finComision">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Actualizar Comisión</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -771,7 +857,245 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVreWp4emp3aHhvdHBkZnpjcGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyNzEwOTMsImV4cCI6MjAzNTg0NzA5M30.Vh4XAp1X6eJlEtqNNzYIoIuTPEweat14VQc9-InHhXc';
+    const idCliente = document.querySelector('input[name="id_cliente"]').value;
 
+    async function cargarYMostrarComisiones() {
+        try {
+            const response = await fetch(`https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Comisiones?id_cliente=eq.${idCliente}&select=*`, {
+                headers: {
+                    'apikey': SUPABASE_API_KEY,
+                    'Authorization': `Bearer ${SUPABASE_API_KEY}`
+                }
+            });
+            
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            
+            const comisiones = await response.json();
+            actualizarTablaComisiones(comisiones);
+        } catch (error) {
+            console.error('Error al cargar comisiones:', error);
+            mostrarError('Error al cargar las comisiones: ' + error.message);
+        }
+    }
+
+    function actualizarTablaComisiones(comisiones) {
+        const tbody = document.querySelector('#otros table tbody');
+        if (!tbody) {
+            console.error('No se encontró el tbody de la tabla');
+            return;
+        }
+
+        tbody.innerHTML = '';
+
+        if (comisiones.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6">No hay comisiones disponibles</td></tr>';
+            return;
+        }
+
+        comisiones.forEach(comision => {
+            const row = tbody.insertRow();
+            row.innerHTML = `
+                <td>${obtenerNombreMoneda(comision.id_tipoMoneda)}</td>
+                <td>${comision.valorComision}</td>
+                <td>${obtenerNombreFormato(comision.id_formatoComision)}</td>
+                <td>${comision.inicioComision}</td>
+                <td>${comision.finComision}</td>
+                <td>
+                    <button class="btn btn-success micono editar-comision" data-id="${comision.id_comision}">
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
+                    <button class="btn btn-danger micono eliminar-comision" data-id="${comision.id_comision}">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td>
+            `;
+        });
+
+        agregarEventListeners();
+    }
+
+    function agregarEventListeners() {
+        document.querySelectorAll('.editar-comision').forEach(btn => {
+            btn.onclick = (e) => cargarDatosComision(e.currentTarget.dataset.id);
+        });
+        document.querySelectorAll('.eliminar-comision').forEach(btn => {
+            btn.onclick = (e) => eliminarComision(e.currentTarget.dataset.id);
+        });
+    }
+
+    async function cargarDatosComision(id) {
+        try {
+            const response = await fetch(`https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Comisiones?id_comision=eq.${id}`, {
+                headers: {
+                    'apikey': SUPABASE_API_KEY,
+                    'Authorization': `Bearer ${SUPABASE_API_KEY}`
+                }
+            });
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const [comision] = await response.json();
+            
+            if (comision) {
+                document.getElementById('actualizar_id_comision').value = comision.id_comision;
+                document.getElementById('actualizar_nombreMoneda').value = comision.id_tipoMoneda;
+                document.getElementById('actualizar_valorComision').value = comision.valorComision;
+                document.getElementById('actualizar_nombreFormato').value = comision.id_formatoComision;
+                document.getElementById('actualizar_inicioComision').value = comision.inicioComision;
+                document.getElementById('actualizar_finComision').value = comision.finComision;
+
+                new bootstrap.Modal(document.getElementById('actualizarcomisionModal')).show();
+            }
+        } catch (error) {
+            console.error('Error al cargar los datos de la comisión:', error);
+            mostrarError('No se pudieron cargar los datos de la comisión');
+        }
+    }
+
+    async function actualizarComision(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const id = formData.get('id_comision');
+        const data = {
+            id_cliente: parseInt(idCliente),
+            id_tipoMoneda: parseInt(formData.get('nombreMoneda')),
+            id_formatoComision: parseInt(formData.get('nombreFormato')),
+            valorComision: parseFloat(formData.get('valorComision')),
+            inicioComision: formData.get('inicioComision'),
+            finComision: formData.get('finComision')
+        };
+
+        try {
+            const response = await fetch(`https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Comisiones?id_comision=eq.${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPABASE_API_KEY,
+                    'Authorization': `Bearer ${SUPABASE_API_KEY}`,
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+            mostrarExito('Comisión actualizada correctamente');
+            bootstrap.Modal.getInstance(document.getElementById('actualizarcomisionModal')).hide();
+            await cargarYMostrarComisiones();
+        } catch (error) {
+            console.error('Error al actualizar la comisión:', error);
+            mostrarError('No se pudo actualizar la comisión: ' + error.message);
+        }
+    }
+
+    async function eliminarComision(id) {
+        if (!await confirmarEliminar()) return;
+
+        try {
+            const response = await fetch(`https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Comisiones?id_comision=eq.${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'apikey': SUPABASE_API_KEY,
+                    'Authorization': `Bearer ${SUPABASE_API_KEY}`
+                }
+            });
+
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+            mostrarExito('La comisión ha sido eliminada.');
+            await cargarYMostrarComisiones();
+        } catch (error) {
+            console.error('Error al eliminar la comisión:', error);
+            mostrarError('No se pudo eliminar la comisión: ' + error.message);
+        }
+    }
+
+    async function agregarComision(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const data = {
+            id_cliente: parseInt(idCliente),
+            id_tipoMoneda: parseInt(formData.get('nombreMoneda')),
+            id_formatoComision: parseInt(formData.get('nombreFormato')),
+            valorComision: parseFloat(formData.get('valorComision')),
+            inicioComision: formData.get('inicioComision'),
+            finComision: formData.get('finComision')
+        };
+
+        try {
+            const response = await fetch('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Comisiones', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPABASE_API_KEY,
+                    'Authorization': `Bearer ${SUPABASE_API_KEY}`,
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+            mostrarExito('Comisión agregada correctamente');
+            bootstrap.Modal.getInstance(document.getElementById('comisionModal')).hide();
+            await cargarYMostrarComisiones();
+        } catch (error) {
+            console.error('Error al agregar la comisión:', error);
+            mostrarError('No se pudo agregar la comisión: ' + error.message);
+        }
+    }
+
+    function obtenerNombreMoneda(id) {
+        const monedas = <?php echo json_encode($monedasMap); ?>;
+        return monedas[id] || 'Desconocido';
+    }
+
+    function obtenerNombreFormato(id) {
+        const formatos = <?php echo json_encode($formatosMap); ?>;
+        return formatos[id] || 'Desconocido';
+    }
+
+    function mostrarExito(mensaje) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: mensaje,
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
+
+    function mostrarError(mensaje) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: mensaje
+        });
+    }
+
+    async function confirmarEliminar() {
+        const result = await Swal.fire({
+            title: '¿Estás seguro?',
+            text: "No podrás revertir esta acción!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar!',
+            cancelButtonText: 'Cancelar'
+        });
+        return result.isConfirmed;
+    }
+
+    // Event Listeners
+    document.getElementById('actualizarComisionForm').addEventListener('submit', actualizarComision);
+    document.getElementById('updateMedioForm3').addEventListener('submit', agregarComision);
+
+    // Inicialización
+    cargarYMostrarComisiones();
+});
+</script>
 
 
 
