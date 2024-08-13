@@ -8,20 +8,6 @@ include 'componentes/sidebar.php';
 ?>
 <div class="main-content">
 
-  <section class="section">
-    <div class="section-body">
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-header milinea">
-              <div class="titulox">
-                <h4>Listado de Productos</h4>
-              </div>
-              <div class="agregar">
-                <button type="button" class="btn btn-primary btn-narango" data-bs-toggle="modal"
-                  data-bs-target="#modalagregar"><i class="fas fa-plus-circle"></i> Agregar Productos</button>
-              </div>
-
 
     <section class="section">
         <div class="section-body">
