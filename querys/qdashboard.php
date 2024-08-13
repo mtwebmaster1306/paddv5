@@ -35,6 +35,7 @@ $productos = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Produ
 
 $soportes = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/Soportes?select=*');
 
+$avisos = makeRequest('https://ekyjxzjwhxotpdfzcpfq.supabase.co/rest/v1/aviso?select=*');
 
 
 $campaignsCount = count($campaigns);
@@ -63,6 +64,33 @@ foreach ($productos as $producto) {
         }
         $productosPorCliente[$nombreCliente]++;
     }
+}
+
+function formatDate($dateString) {
+    $date = new DateTime($dateString);
+    $formattedDate = $date->format('d F Y \a \l\a\s H:i');
+    
+    // Translate month names to Spanish
+    $months = [
+        'January' => 'enero',
+        'February' => 'febrero',
+        'March' => 'marzo',
+        'April' => 'abril',
+        'May' => 'mayo',
+        'June' => 'junio',
+        'July' => 'julio',
+        'August' => 'agosto',
+        'September' => 'septiembre',
+        'October' => 'octubre',
+        'November' => 'noviembre',
+        'December' => 'diciembre'
+    ];
+
+    foreach ($months as $english => $spanish) {
+        $formattedDate = str_replace($english, $spanish, $formattedDate);
+    }
+
+    return $formattedDate;
 }
 
 // Preparar datos para el gráficos
