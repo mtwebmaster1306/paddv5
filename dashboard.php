@@ -117,21 +117,21 @@ include 'querys/qdashboard.php';
     </div>
 
     <div class="row">
-      <div class="col-6 col-sm-6 col-lg-6">
+      <div class="col-6 col-sm-6 col-lg-4">
         <div class="card">
           <div class="card-header">
-            <h4>Clientes Productos</h4>
+            <h4 class="peque">Clientes Productos</h4>
           </div>
           <div class="card-body">
             <canvas id="myPieChart"></canvas>
           </div>
         </div>
       </div>
-      <div class="col-6 col-sm-6 col-lg-6">
+      <div class="col-6 col-sm-6 col-lg-4">
 
         <div class="card">
           <div class="card-header">
-            <h4>Aviso</h4>
+            <h4 class="peque">Aviso</h4>
           </div>
           <div class="card-body">
             <ul class="list-unstyled list-unstyled-border user-list" id="message-list">
@@ -155,6 +155,34 @@ include 'querys/qdashboard.php';
 
 
       </div>
+      <div class="col-6 col-sm-6 col-lg-4">
+
+<div class="card">
+  <div class="card-header">
+    <h4 class="peque">Aviso</h4>
+  </div>
+  <div class="card-body">
+    <ul class="list-unstyled list-unstyled-border user-list" id="message-list">
+      <?php foreach ($avisos as $aviso): ?>
+
+        <li class="items-list-compo">
+        <i class="fas fa-inbox"></i>
+          <div class="media-body w-100">
+            <div class="mt-0 fw-bold ttc"><?php echo $aviso['mensaje'] ?></div>
+            <div  class="text-small"> Fecha de creación: <?php echo formatDate($aviso['created_at']); ?></div>
+       
+          </div>
+        </li>
+        </tr>
+      <?php endforeach; ?>
+
+
+    </ul>
+  </div>
+</div>
+
+
+</div>
     </div>
 
 

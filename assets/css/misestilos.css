@@ -282,3 +282,14 @@ li.items-list-compo i {
 .form-group.arriba2 {
   margin-top: -15px;
 }
+.font-15 {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+}
+.peque {
+  font-size: 14px !important;
+}
+.svg-inline--fa.fa-inbox {
+  font-size: 20px !important;
+  padding: 20px !important;
+}

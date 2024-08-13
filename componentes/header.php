@@ -13,7 +13,7 @@ $nombre = $_SESSION['user_name'];
 
 
 
-$ruta = 'http://localhost:3000/';
+$ruta = 'https://verbose-train-v6gjxgrqw6x7h64gv-3000.app.github.dev/';
 
 
 
